@@ -31,6 +31,7 @@ import PageTitle from "../../components/PageTitle";
 import { Typography } from "../../components/Wrappers";
 import Dot from "../../components/Sidebar/components/Dot";
 import Table from "./components/Table/Table";
+import Report from "./components/Report/Report";
 import BigStat from "./components/BigStat/BigStat";
 
 const mainChartData = getMainChartData();

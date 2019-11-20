@@ -5,6 +5,9 @@ const secondary = "#FF5C93";
 const warning = "#FFC260";
 const success = "#3CD4A0";
 const info = "#9013FE";
+const active = "#3CD4A0";
+const deleted = "#FF5C93";
+const pause = "#FFC260";
 
 const lightenRate = 7.5;
 const darkenRate = 15;
@@ -45,6 +48,34 @@ export default {
         .lighten(lightenRate)
         .toHexString(),
       dark: tinycolor(success)
+        .darken(darkenRate)
+        .toHexString(),
+    },
+    active: {
+      main: success,
+      light: tinycolor(success)
+        .lighten(lightenRate)
+        .toHexString(),
+      dark: tinycolor(success)
+        .darken(darkenRate)
+        .toHexString(),
+    },
+    deleted: {
+      main: secondary,
+      light: tinycolor(secondary)
+        .lighten(lightenRate)
+        .toHexString(),
+      dark: tinycolor(secondary)
+        .darken(darkenRate)
+        .toHexString(),
+      contrastText: "#FFFFFF",
+    },
+    pause: {
+      main: warning,
+      light: tinycolor(warning)
+        .lighten(lightenRate)
+        .toHexString(),
+      dark: tinycolor(warning)
         .darken(darkenRate)
         .toHexString(),
     },
