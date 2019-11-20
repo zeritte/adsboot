@@ -11,10 +11,10 @@ import Table from "../dashboard/components/Table/Table";
 import mock from "../dashboard/mock";
 
 const datatableData = [
-  ["Joe James", "Example Inc.", "Yonkers", "NY"],
-  ["John Walsh", "Example Inc.", "Hartford", "CT"],
-  ["Bob Herm", "Example Inc.", "Tampa", "FL"],
-  ["James Houston", "Example Inc.", "Dallas", "TX"],
+  ["Joe James", "Example Inc.", "Yonkers", "NY","Joe James", "Example Inc.", "Yonkers", "NY"],
+  ["John Walsh", "Example Inc.", "Hartford", "CT","John Walsh", "Example Inc.", "Hartford", "CT"],
+  ["Bob Herm", "Example Inc.", "Tampa", "FL","Bob Herm", "Example Inc.", "Tampa", "FL"],
+  ["James Houston", "Example Inc.", "Dallas", "TX","James Houston", "Example Inc.", "Dallas", "TX"],
   ["Prabhakar Linwood", "Example Inc.", "Hartford", "CT"],
   ["Kaui Ignace", "Example Inc.", "Yonkers", "NY"],
   ["Esperanza Susanne", "Example Inc.", "Hartford", "CT"],
@@ -39,7 +39,7 @@ export default function Tables() {
           <MUIDataTable
             title="Employee List"
             data={datatableData}
-            columns={["Name", "Company", "City", "State"]}
+            columns={["Ad ID",	"Status",	"Headline Part 1",	"Headline Part 2",	"Description",	"Final Url",	"AdGroup Id",	"Client Id"]}
             options={{
               filterType: "checkbox",
             }}
