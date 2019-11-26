@@ -12,23 +12,14 @@ import Report from "../dashboard/components/Report/Report";
 import mock from "../dashboard/mock";
 
 const datatableData = [
-  ["Joe James", "Example Inc.", "Yonkers", "NY","Joe James", "Example Inc.", "Yonkers", "NY", "NY"],
-  ["John Walsh", "Example Inc.", "Hartford", "CT","John Walsh", "Example Inc.", "Hartford", "CT", "NY"],
-  ["Bob Herm", "Example Inc.", "Tampa", "FL","Bob Herm", "Example Inc.", "Tampa", "FL"],
-  ["James Houston", "Example Inc.", "Dallas", "TX","James Houston", "Example Inc.", "Dallas", "TX", "NY"],
-  ["Prabhakar Linwood", "Example Inc.", "Hartford", "CT", "NY"],
-  ["Kaui Ignace", "Example Inc.", "Yonkers", "NY", "NY"],
-  ["Esperanza Susanne", "Example Inc.", "Hartford", "CT", "CT"],
-  ["Christian Birgitte", "Example Inc.", "Tampa", "FL", "CT"],
-  ["Meral Elias", "Example Inc.", "Hartford", "CT", "CT"],
-  ["Deep Pau", "Example Inc.", "Yonkers", "NY", "CT"],
-  ["Sebastiana Hani", "Example Inc.", "Dallas", "TX", "TX"],
-  ["Marciano Oihana", "Example Inc.", "Yonkers", "NY", "TX"],
-  ["Brigid Ankur", "Example Inc.", "Dallas", "TX", "TX"],
-  ["Anna Siranush", "Example Inc.", "Yonkers", "NY", "TX"],
-  ["Avram Sylva", "Example Inc.", "Hartford", "CT","FL"],
-  ["Serafima Babatunde", "Example Inc.", "Tampa", "FL","FL"],
-  ["Gaston Festus", "Example Inc.", "Tampa", "FL","FL"],
+  ["386047344928","ENABLED" ,"The new Solaris onlineshop", "25 years of style",	"More than 50 exclusive, popular and luxury sunglasses brands.","https://www.solarisco.com/TR_EN/", "Generic","Brand_Solaris_TR_EN",  "Solaris1"],
+["386047344931","ENABLED" ,"Solaris sunglasses", "The new onlineshop","More than 50 exclusive sunglasses brands for him & her.", "https://www.solarisco.com/TR_EN/	82524424681","Generic","Brand_Solaris&Other Brands_TR_TR" , "Solaris2"],
+["386047344934","ENABLED" ,"Solaris sunglasses",	"10% off your first order",	"Exclusive sunglass brands & models. Market’s most diverse assortment." ,"https://www.solarisco.com/TR_EN/"	,"Woman","Brands_Burberry_TR_EN	1", "Solaris3"],
+["386047404469","ENABLED" ,"Boss Orange Güne? Gözlü?ü","?lk Al??veri?te %10 ?ndirim",	"Boss Orange güne? gözlüklerinde Solaris avantajlar?n? kaç?rmay?n.","https://www.solarisco.com/TR_TR/boss-orange","Woman","Brands_Emporio Armani_TR_EN", "Solaris3"],
+["386047344928","ENABLED" ,"The new Solaris onlineshop", "25 years of style",	"More than 50 exclusive, popular and luxury sunglasses brands.","https://www.solarisco.com/TR_EN/", "Generic","Brand_Solaris_TR_EN",  "Solaris1"],
+["386047344931","ENABLED" ,"Solaris sunglasses", "The new onlineshop","More than 50 exclusive sunglasses brands for him & her.", "https://www.solarisco.com/TR_EN/	82524424681","Generic","Brand_Solaris&Other Brands_TR_TR" , "Solaris2"],
+["386047344934","ENABLED" ,"Solaris sunglasses",	"10% off your first order",	"Exclusive sunglass brands & models. Market’s most diverse assortment." ,"https://www.solarisco.com/TR_EN/"	,"Woman","Brands_Burberry_TR_EN	1", "Solaris3"],
+["386047404469","ENABLED" ,"Boss Orange Güne? Gözlü?ü","?lk Al??veri?te %10 ?ndirim",	"Boss Orange güne? gözlüklerinde Solaris avantajlar?n? kaç?rmay?n.","https://www.solarisco.com/TR_TR/boss-orange","Woman","Brands_Emporio Armani_TR_EN", "Solaris3"],
 ];
 
 export default function Tables() {
