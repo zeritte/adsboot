@@ -26,7 +26,7 @@ const datatableData = [
 
 export default function Tables() {
 
-  const [adsDataTable,setAdsDataTable] = useState('')
+  const [adsDataTable,setAdsDataTable] = useState([])
 
     useEffect(() => {
     
@@ -57,7 +57,7 @@ export default function Tables() {
         <Grid item xs={12}>
           <MUIDataTable
             title="Employee List"
-            data={datatableData}
+            data={adsDataTable || [] }
             columns={["Ad ID",	"Status",	"Headline Part 1",	"Headline Part 2",	"Description",	"Final Url",	"AdGroup", "Campaign",	"Client"]}
             options={{
               filterType: "checkbox",
