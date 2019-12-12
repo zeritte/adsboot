@@ -7,3 +7,7 @@ export const LOG_IN_FAIL = "log_in_fail";
 export const SIGN_UP = "sign_up";
 export const SIGN_UP_SUCCESS = "sign_up_success";
 export const SIGN_UP_FAIL = "sign_up_fail";
+export const LOG_OUT = "logout";
+export const FORGOT_PASSWORD = "forgot_password";
+export const FORGOT_SUCCESS = "forgot_success";
+export const FORGOT_FAIL = "forgot_fail";
