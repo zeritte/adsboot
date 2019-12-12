@@ -304,7 +304,7 @@ export default function Header(props) {
               classes.headerMenuItem,
             )}
           >
-            <AccountIcon className={classes.profileMenuIcon} /> Profile
+            <AccountIcon className={classes.profileMenuIcon} /> Account1
           </MenuItem>
           <MenuItem
             className={classNames(
@@ -312,7 +312,7 @@ export default function Header(props) {
               classes.headerMenuItem,
             )}
           >
-            <AccountIcon className={classes.profileMenuIcon} /> Tasks
+            <AccountIcon className={classes.profileMenuIcon} /> Account2
           </MenuItem>
           <MenuItem
             className={classNames(
@@ -320,7 +320,7 @@ export default function Header(props) {
               classes.headerMenuItem,
             )}
           >
-            <AccountIcon className={classes.profileMenuIcon} /> Messages
+            <AccountIcon className={classes.profileMenuIcon} /> Account3
           </MenuItem>
           <div className={classes.profileMenuUser}>
             <Typography
