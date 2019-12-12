@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect,useState} from "react";
 import { Grid } from "@material-ui/core";
 import MUIDataTable from "mui-datatables";
 
@@ -23,31 +23,32 @@ const datatableData = [
 ["386047404469","ENABLED" ,"Boss Orange Güne? Gözlü?ü","?lk Al??veri?te %10 ?ndirim",	"Boss Orange güne? gözlüklerinde Solaris avantajlar?n? kaç?rmay?n.","https://www.solarisco.com/TR_TR/boss-orange","Woman","Brands_Emporio Armani_TR_EN", "Solaris3"],
 ];
 
+
 export default function Tables() {
+
+  const [adsDataTable,setAdsDataTable] = useState('')
 
     useEffect(() => {
     
       axios.get('https://adsbot-api.herokuapp.com/dashboard/getAds')
       .then((response) => {
+          
+          console.log(response.data)
           console.log(response)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
 
-      axios.get('http://adsbot-api.herokuapp.com/dashboard/getAds')
-      .then((response) => {
-          console.log(response)
+          const arr = response.data.map((item)=>{
+              return Object.keys(item).map(i => item[i])
+          })
+          setAdsDataTable(arr)
       })
       .catch((err) => {
         console.log(err)
       })
     },[])
 
-
-
-
-
+    useEffect(() => {
+      console.log('state güncellendi',adsDataTable)
+  },[adsDataTable])
 
   return (
     <>
