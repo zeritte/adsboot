@@ -6,8 +6,6 @@ import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import thunk from "redux-thunk";
 import reducers from "./reducers";
 
-export const history = History.createBrowserHistory();
-
 const initialState = {};
 const enhancers = [];
 const middleware = [thunk];
