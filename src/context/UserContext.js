@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios'
 
 var UserStateContext = React.createContext();
 var UserDispatchContext = React.createContext();
@@ -49,8 +50,32 @@ export { UserProvider, useUserState, useUserDispatch, loginUser, signOut };
 
 // ###########################################################
 
-function loginUser(dispatch, login, password, history, setIsLoading, setError) {
-  setError(false);
+function loginUser(dispatch,username, login, userpassword, history, setIsLoading, setError) {
+  console.log(dispatch)
+  console.log(username)
+  console.log(login)
+  console.log(userpassword)
+
+  const data2 = {
+    name: username,
+    email: login,
+    password: userpassword
+  }
+  console.log(data2)
+  const data = new FormData();
+  data.append('name', username);
+  data.append('email', login);
+  data.append('password', userpassword);
+  console.log(data2)
+  console.log(data)
+  axios.post('http://localhost:8080/dashboard/createUser',data)
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  /*setError(false);
   setIsLoading(true);
 
   if (!!login && !!password) {
@@ -66,7 +91,7 @@ function loginUser(dispatch, login, password, history, setIsLoading, setError) {
     dispatch({ type: "LOGIN_FAILURE" });
     setError(true);
     setIsLoading(false);
-  }
+  }*/
 }
 
 function signOut(dispatch, history) {
