@@ -68,7 +68,7 @@ function loginUser(dispatch,username, login, userpassword, history, setIsLoading
   data.append('password', userpassword);
   console.log(data2)
   console.log(data)
-  axios.post('http://localhost:8080/dashboard/createUser',data)
+  axios.post('https://adsbot-api.herokuapp.com/dashboard/createUser',data)
       .then((response) => {
         console.log(response)
       })
