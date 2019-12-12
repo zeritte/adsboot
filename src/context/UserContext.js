@@ -71,9 +71,20 @@ function loginUser(dispatch,username, login, userpassword, history, setIsLoading
   axios.post('https://adsbot-api.herokuapp.com/dashboard/createUser',data)
       .then((response) => {
         console.log(response)
+        setTimeout(() => {
+          localStorage.setItem("id_token", "1");
+          dispatch({ type: "LOGIN_SUCCESS" });
+          setError(null);
+          setIsLoading(false);
+    
+          history.push("/app/dashboard");
+        }, 2000);
       })
       .catch((err) => {
         console.log(err)
+        dispatch({ type: "LOGIN_FAILURE" });
+        setError(true);
+        setIsLoading(false);
       })
   /*setError(false);
   setIsLoading(true);
