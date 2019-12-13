@@ -38,7 +38,14 @@ export default function Tables() {
       console.log('state güncellendi',adsDataTable)
   },[adsDataTable])
 
+  const options = {
+    filter: true,
+    filterType: "dropdown", //"checkbox"
+    columns: ["Status"]
+  };
+
   return (
+    
     <>
       <PageTitle title="Tables" />
       <Grid container spacing={4}>
@@ -47,9 +54,8 @@ export default function Tables() {
             title="Employee List"
             data={adsDataTable || [] }
             columns={["Ad ID",	"Status",	"Headline Part 1",	"Headline Part 2",	"Description",	"Final Url",	"AdGroup", "Campaign",	"Client"]}
-            options={{
-              filterType: "checkbox",
-            }}
+            options={options}
+            
           />
         </Grid>
         <Grid item xs={12}>
