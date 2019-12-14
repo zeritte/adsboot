@@ -204,6 +204,7 @@ function Login(props) {
                     onClick={() =>
                       loginUser(
                         userDispatch,
+                        nameValue,
                         loginValue,
                         passwordValue,
                         props.history,

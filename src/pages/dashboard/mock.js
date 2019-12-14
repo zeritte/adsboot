@@ -178,5 +178,38 @@ export default {
       city: "Hanoverton",
       status: "Sent"
     }
+  ],
+  report: [
+    {
+      adId: 1,
+      adGroup: "adgroup1",
+      campaign: "campaign1",
+      client: "client1",
+      finalURL: "finalURL1",
+      isStockOut: "false",
+      is404NotFound: "true",
+      status: "pause"
+    },
+    {
+      adId: 2,
+      adGroup: "adgroup2",
+      campaign: "campaign2",
+      client: "client2",
+      finalURL: "finalURL2",
+      isStockOut: "true",
+      is404NotFound: "false",
+      status: "deleted"
+    },
+    {
+      adId: 3,
+      adGroup: "adgroup3",
+      campaign: "campaign3",
+      client: "client3",
+      finalURL: "finalURL3",
+      isStockOut: "false",
+      is404NotFound: "true",
+      status: "active"
+    },
   ]
+
 };

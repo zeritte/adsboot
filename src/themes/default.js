@@ -48,6 +48,34 @@ export default {
         .darken(darkenRate)
         .toHexString(),
     },
+    active: {
+      main: success,
+      light: tinycolor(success)
+        .lighten(lightenRate)
+        .toHexString(),
+      dark: tinycolor(success)
+        .darken(darkenRate)
+        .toHexString(),
+    },
+    deleted: {
+      main: secondary,
+      light: tinycolor(secondary)
+        .lighten(lightenRate)
+        .toHexString(),
+      dark: tinycolor(secondary)
+        .darken(darkenRate)
+        .toHexString(),
+      contrastText: "#FFFFFF",
+    },
+    pause: {
+      main: warning,
+      light: tinycolor(warning)
+        .lighten(lightenRate)
+        .toHexString(),
+      dark: tinycolor(warning)
+        .darken(darkenRate)
+        .toHexString(),
+    },
     info: {
       main: info,
       light: tinycolor(info)
