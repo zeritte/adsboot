@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 
 // components
@@ -8,12 +8,13 @@ import Layout from "./Layout";
 import Error from "../pages/error";
 import Login from "../pages/login";
 
-// context
-import { useUserState } from "../context/UserContext";
+import { connect } from "react-redux";
 
-export default function App() {
-  // global
-  var { isAuthenticated } = useUserState();
+function App(props) {
+  const [isAuthenticated, setIsAuth] = useState(false);
+  useEffect(() => {
+    setIsAuth(props.isLoggedIn);
+  }, [props.isLoggedIn]);
 
   return (
     <HashRouter>
@@ -74,3 +75,9 @@ export default function App() {
     );
   }
 }
+
+const mapStateToProps = state => {
+  const { isLoggedIn } = state.auth;
+  return { isLoggedIn };
+};
+export default connect(mapStateToProps)(App);

@@ -5,6 +5,9 @@ import { createWhitelistFilter } from "redux-persist-transform-filter";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import thunk from "redux-thunk";
 import reducers from "./reducers";
+import createHistory from "history/createBrowserHistory";
+
+export const history = createHistory();
 
 const initialState = {};
 const enhancers = [];
@@ -24,7 +27,7 @@ const persistConfig = {
   key: "root",
   storage,
   stateReconciler: autoMergeLevel2,
-  transforms: [createWhitelistFilter("main", ["isLoggedIn"])],
+  transforms: [createWhitelistFilter("auth", ["isLoggedIn"])],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

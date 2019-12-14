@@ -33,7 +33,9 @@ import {
   useLayoutDispatch,
   toggleSidebar,
 } from "../../context/LayoutContext";
-import { useUserDispatch, signOut } from "../../context/UserContext";
+
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions";
 
 const messages = [
   {
@@ -88,13 +90,12 @@ const notifications = [
   },
 ];
 
-export default function Header(props) {
+function Header(props) {
   var classes = useStyles();
 
   // global
   var layoutState = useLayoutState();
   var layoutDispatch = useLayoutDispatch();
-  var userDispatch = useUserDispatch();
 
   // local
   var [mailMenu, setMailMenu] = useState(null);
@@ -326,7 +327,7 @@ export default function Header(props) {
             <Typography
               className={classes.profileMenuLink}
               color="primary"
-              onClick={() => signOut(userDispatch, props.history)}
+              onClick={() => props.logoutUser(props.history)}
             >
               Sign Out
             </Typography>
@@ -336,3 +337,5 @@ export default function Header(props) {
     </AppBar>
   );
 }
+
+export default connect(null, { logoutUser })(Header);

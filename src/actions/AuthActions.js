@@ -12,7 +12,7 @@ import {
   FORGOT_PASSWORD,
   FORGOT_SUCCESS,
 } from "./types";
-import { urls } from "../urls";
+import urls from "../urls";
 
 export const setItem = (prop, value) => dispatch => {
   dispatch({ type: SET_ITEM, payload: { prop, value } });
@@ -28,9 +28,8 @@ export const loginUser = (email, password) => dispatch => {
     .catch(error => {
       dispatch({
         type: LOG_IN_FAIL,
-        payload: null,
+        payload: "Couldnt",
       });
-      console.log(error);
     });
 };
 
@@ -51,17 +50,16 @@ export const forgotPassword = email => dispatch => {
     });
 };
 
-export const signUp = user => dispatch => {
+export const signUp = (name, email, password, history) => dispatch => {
   dispatch({ type: SIGN_UP });
   axios
-    .post(urls.registration, {
-      user,
-    })
+    .post(urls.registration, { name, email, password })
     .then(response => {
+      history.push("/app/dashboard");
       dispatch({ type: SIGN_UP_SUCCESS, payload: response.data.message });
     })
     .catch(error => {
-      dispatch({ type: SIGN_UP_FAIL, payload: null });
+      dispatch({ type: SIGN_UP_FAIL, payload: error.response.data.message });
       console.log(error);
     });
 };

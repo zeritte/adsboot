@@ -15,12 +15,7 @@ import { persistor, store } from "./store";
 
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate
-      loading={() => {
-        return <div />;
-      }}
-      persistor={persistor}
-    >
+    <PersistGate loading={<div />} persistor={persistor}>
       <LayoutProvider>
         <UserProvider>
           <ThemeProvider theme={Themes.default}>

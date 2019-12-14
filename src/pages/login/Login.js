@@ -19,22 +19,19 @@ import useStyles from "./styles";
 import logo from "./logo.svg";
 import google from "../../images/google.svg";
 
-// context
-import { useUserDispatch, loginUser } from "../../context/UserContext";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { loginUser, signUp } from "../../actions/";
 
 function Login(props) {
   var classes = useStyles();
 
-  // global
-  var userDispatch = useUserDispatch();
-
-  // local
-  var [isLoading, setIsLoading] = useState(false);
-  var [error, setError] = useState(null);
   var [activeTabId, setActiveTabId] = useState(0);
   var [nameValue, setNameValue] = useState("");
   var [loginValue, setLoginValue] = useState("");
   var [passwordValue, setPasswordValue] = useState("");
+
+  const go = () => props.history.push("/app/dashboard");
 
   return (
     <Grid container className={classes.container}>
@@ -68,7 +65,7 @@ function Login(props) {
                 <Typography className={classes.formDividerWord}>or</Typography>
                 <div className={classes.formDivider} />
               </div>
-              <Fade in={error}>
+              <Fade in={!!props.signUpError}>
                 <Typography color="secondary" className={classes.errorMessage}>
                   Something is wrong with your login or password :(
                 </Typography>
@@ -104,7 +101,7 @@ function Login(props) {
                 fullWidth
               />
               <div className={classes.formButtons}>
-                {isLoading ? (
+                {props.loginLoading ? (
                   <CircularProgress size={26} className={classes.loginLoader} />
                 ) : (
                   <Button
@@ -112,14 +109,7 @@ function Login(props) {
                       loginValue.length === 0 || passwordValue.length === 0
                     }
                     onClick={() =>
-                      loginUser(
-                        userDispatch,
-                        loginValue,
-                        passwordValue,
-                        props.history,
-                        setIsLoading,
-                        setError,
-                      )
+                      props.loginUser(loginValue, passwordValue, go)
                     }
                     variant="contained"
                     color="primary"
@@ -146,7 +136,7 @@ function Login(props) {
               <Typography variant="h2" className={classes.subGreeting}>
                 Create your account
               </Typography>
-              <Fade in={error}>
+              <Fade in={!!props.loginError}>
                 <Typography color="secondary" className={classes.errorMessage}>
                   Something is wrong with your login or password :(
                 </Typography>
@@ -197,19 +187,16 @@ function Login(props) {
                 fullWidth
               />
               <div className={classes.creatingButtonContainer}>
-                {isLoading ? (
+                {props.signUpLoading ? (
                   <CircularProgress size={26} />
                 ) : (
                   <Button
                     onClick={() =>
-                      loginUser(
-                        userDispatch,
+                      props.signUp(
                         nameValue,
                         loginValue,
                         passwordValue,
                         props.history,
-                        setIsLoading,
-                        setError,
                       )
                     }
                     disabled={
@@ -253,4 +240,18 @@ function Login(props) {
   );
 }
 
-export default withRouter(Login);
+const mapStateToProps = state => {
+  const {
+    isLoggedIn,
+    loginLoading,
+    signUpLoading,
+    loginError,
+    signUpError,
+  } = state.auth;
+  return { isLoggedIn, loginLoading, signUpLoading, loginError, signUpError };
+};
+
+export default compose(
+  withRouter,
+  connect(mapStateToProps, { loginUser, signUp }),
+)(Login);
