@@ -11,3 +11,7 @@ export const LOG_OUT = "logout";
 export const FORGOT_PASSWORD = "forgot_password";
 export const FORGOT_SUCCESS = "forgot_success";
 export const FORGOT_FAIL = "forgot_fail";
+
+export const GET_ALL_ADS = "get_all_ads";
+export const GET_ALL_ADS_SUCCESS = "get_all_ads_success";
+export const GET_ALL_ADS_FAIL = "get_all_ads_fail";
