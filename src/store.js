@@ -5,9 +5,9 @@ import { createWhitelistFilter } from "redux-persist-transform-filter";
 import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import thunk from "redux-thunk";
 import reducers from "./reducers";
-import createHistory from "history/createBrowserHistory";
+import { createBrowserHistory } from "history";
 
-export const history = createHistory();
+export const history = createBrowserHistory();
 
 const initialState = {};
 const enhancers = [];
