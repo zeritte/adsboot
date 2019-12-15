@@ -64,12 +64,12 @@ function Tables(props) {
       name: "finalUrl",
       options: {
         filter: false,
-        sort: true,
+        sort: false,
       },
     },
     {
-      label: "AdGroup",
-      name: "adGroup",
+      label: "Client",
+      name: "client",
       options: {
         filter: true,
         sort: true,
@@ -84,8 +84,8 @@ function Tables(props) {
       },
     },
     {
-      label: "Client",
-      name: "client",
+      label: "AdGroup",
+      name: "adGroup",
       options: {
         filter: true,
         sort: true,
