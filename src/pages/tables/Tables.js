@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import MUIDataTable from "mui-datatables";
 
 // components
@@ -118,6 +119,8 @@ function Tables(props) {
     <>
       <PageTitle title="Tables" />
       <Grid container spacing={4}>
+        {props.adsDataTableLoading ? <CircularProgress /> : null}
+        <Typography>{props.adsDataTableError}</Typography>
         <Grid item xs={12}>
           <MUIDataTable
             title="Ad List"
@@ -137,8 +140,8 @@ function Tables(props) {
 }
 
 const mapStateToProps = state => {
-  const { adsDataTable } = state.ad;
-  return { adsDataTable };
+  const { adsDataTable, adsDataTableLoading } = state.ad;
+  return { adsDataTable, adsDataTableLoading };
 };
 
 export default connect(mapStateToProps, { getAllAds })(Tables);
