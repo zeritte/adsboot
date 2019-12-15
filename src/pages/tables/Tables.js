@@ -20,6 +20,7 @@ function Tables(props) {
 
   useEffect(() => {
     props.getAllAds();
+    // eslint-disable-next-line
   }, []);
 
   const columns = [
