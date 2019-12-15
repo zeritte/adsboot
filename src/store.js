@@ -27,7 +27,10 @@ const persistConfig = {
   key: "root",
   storage,
   stateReconciler: autoMergeLevel2,
-  transforms: [createWhitelistFilter("auth", ["isLoggedIn"])],
+  transforms: [
+    createWhitelistFilter("auth", ["isLoggedIn"]),
+    createWhitelistFilter("ad", []),
+  ],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
