@@ -31,8 +31,6 @@ function Login(props) {
   var [loginValue, setLoginValue] = useState("");
   var [passwordValue, setPasswordValue] = useState("");
 
-  const go = () => props.history.push("/app/dashboard");
-
   return (
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer}>
@@ -65,9 +63,9 @@ function Login(props) {
                 <Typography className={classes.formDividerWord}>or</Typography>
                 <div className={classes.formDivider} />
               </div>
-              <Fade in={!!props.signUpError}>
+              <Fade in={!!props.loginError}>
                 <Typography color="secondary" className={classes.errorMessage}>
-                  Something is wrong with your login or password :(
+                  {props.loginError}
                 </Typography>
               </Fade>
               <TextField
@@ -108,9 +106,7 @@ function Login(props) {
                     disabled={
                       loginValue.length === 0 || passwordValue.length === 0
                     }
-                    onClick={() =>
-                      props.loginUser(loginValue, passwordValue, go)
-                    }
+                    onClick={() => props.loginUser(loginValue, passwordValue)}
                     variant="contained"
                     color="primary"
                     size="large"
@@ -136,9 +132,9 @@ function Login(props) {
               <Typography variant="h2" className={classes.subGreeting}>
                 Create your account
               </Typography>
-              <Fade in={!!props.loginError}>
+              <Fade in={!!props.signUpError}>
                 <Typography color="secondary" className={classes.errorMessage}>
-                  Something is wrong with your login or password :(
+                  {props.signUpError}
                 </Typography>
               </Fade>
               <TextField
@@ -192,12 +188,7 @@ function Login(props) {
                 ) : (
                   <Button
                     onClick={() =>
-                      props.signUp(
-                        nameValue,
-                        loginValue,
-                        passwordValue,
-                        props.history,
-                      )
+                      props.signUp(nameValue, loginValue, passwordValue)
                     }
                     disabled={
                       loginValue.length === 0 ||

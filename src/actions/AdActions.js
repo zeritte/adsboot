@@ -12,7 +12,7 @@ export const getAllAds = () => dispatch => {
     .catch(error => {
       dispatch({
         type: GET_ALL_ADS_FAIL,
-        payload: "Couldnt",
+        payload: "Could not fetch the data",
       });
     });
 };
