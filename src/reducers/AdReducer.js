@@ -2,6 +2,9 @@ import {
   GET_ALL_ADS,
   GET_ALL_ADS_FAIL,
   GET_ALL_ADS_SUCCESS,
+  RUN_RULES,
+  RUN_RULES_FAIL,
+  RUN_RULES_SUCCESS,
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -26,6 +29,12 @@ export default (state = INITIAL_STATE, action) => {
         adsDataTableLoading: false,
         adsDataTableError: "Could not fetch the data",
       };
+    case RUN_RULES:
+      return { ...state };
+    case RUN_RULES_FAIL:
+      return { ...state };
+    case RUN_RULES_SUCCESS:
+      return { ...state };
     default:
       return state;
   }

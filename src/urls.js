@@ -4,7 +4,7 @@ const session = `${base_url}login`;
 const registration = `${base_url}signup`;
 const password = `${base_url}passwords`;
 const getAllAds = `${base_url}getAds`;
-const runFilter = `${base_url}run`;
+const runRules = `${base_url}run`;
 
 export default {
   base_url,
@@ -12,5 +12,5 @@ export default {
   registration,
   password,
   getAllAds,
-  runFilter,
+  runRules,
 };

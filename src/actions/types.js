@@ -15,3 +15,6 @@ export const FORGOT_FAIL = "forgot_fail";
 export const GET_ALL_ADS = "get_all_ads";
 export const GET_ALL_ADS_SUCCESS = "get_all_ads_success";
 export const GET_ALL_ADS_FAIL = "get_all_ads_fail";
+export const RUN_RULES = "run_rules";
+export const RUN_RULES_SUCCESS = "run_rules_success";
+export const RUN_RULES_FAIL = "run_rules_fail";

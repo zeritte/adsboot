@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography, Button } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import MUIDataTable from "mui-datatables";
 
@@ -12,7 +12,7 @@ import Report from "../dashboard/components/Report/Report";
 import mock from "../dashboard/mock";
 
 import { connect } from "react-redux";
-import { getAllAds } from "../../actions";
+import { getAllAds, runRules } from "../../actions";
 
 function Tables(props) {
   const [selectedRows, setSelectedRows] = useState([]);
@@ -113,14 +113,30 @@ function Tables(props) {
       setSelectedRows([]);
       return false;
     },
+    // TODO FILTER NOT WORKS
   };
+
+  const runRules = () => props.runRules(selectedAdIds);
 
   return (
     <>
       <PageTitle title="Tables" />
       <Grid container spacing={4}>
-        {props.adsDataTableLoading ? <CircularProgress /> : null}
-        <Typography>{props.adsDataTableError}</Typography>
+        <Grid container justify="center">
+          {props.adsDataTableLoading ? <CircularProgress /> : null}
+          <Typography>{props.adsDataTableError}</Typography>
+        </Grid>
+        <Grid container justify="flex-end" style={{ marginRight: 20 }}>
+          <Button
+            disabled={selectedAdIds.length === 0}
+            onClick={runRules}
+            variant="contained"
+            color="primary"
+            size="large"
+          >
+            RUN RULES
+          </Button>
+        </Grid>
         <Grid item xs={12}>
           <MUIDataTable
             title="Ad List"
@@ -128,6 +144,17 @@ function Tables(props) {
             columns={columns}
             options={options}
           />
+        </Grid>
+        <Grid container justify="flex-end" style={{ marginRight: 20 }}>
+          <Button
+            disabled={selectedAdIds.length === 0}
+            onClick={runRules}
+            variant="contained"
+            color="primary"
+            size="large"
+          >
+            RUN RULES
+          </Button>
         </Grid>
         <Grid item xs={12}>
           <Widget title="Report Table" upperTitle noBodyPadding>
@@ -144,4 +171,4 @@ const mapStateToProps = state => {
   return { adsDataTable, adsDataTableLoading };
 };
 
-export default connect(mapStateToProps, { getAllAds })(Tables);
+export default connect(mapStateToProps, { getAllAds, runRules })(Tables);
