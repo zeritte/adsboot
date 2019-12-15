@@ -113,7 +113,7 @@ function Tables(props) {
       setSelectedRows([]);
       return false;
     },
-    // TODO FILTER NOT WORKS
+    // TODO FILTER NOT WORKS RELATED TO PACKAGE https://github.com/gregnb/mui-datatables/pull/1058
   };
 
   const runRules = () => props.runRules(selectedAdIds);
