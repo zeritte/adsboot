@@ -167,8 +167,8 @@ function Tables(props) {
 }
 
 const mapStateToProps = state => {
-  const { adsDataTable, adsDataTableLoading } = state.ad;
-  return { adsDataTable, adsDataTableLoading };
+  const { adsDataTable, adsDataTableLoading, adsDataTableError } = state.ad;
+  return { adsDataTable, adsDataTableLoading, adsDataTableError };
 };
 
 export default connect(mapStateToProps, { getAllAds, runRules })(Tables);
