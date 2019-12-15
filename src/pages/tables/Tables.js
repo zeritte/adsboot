@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
 import MUIDataTable from "mui-datatables";
 
@@ -14,6 +14,9 @@ import { connect } from "react-redux";
 import { getAllAds } from "../../actions";
 
 function Tables(props) {
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [selectedAdIds, setSelectedAdIds] = useState([]);
+
   useEffect(() => {
     props.getAllAds();
   }, []);
@@ -95,6 +98,20 @@ function Tables(props) {
 
   const options = {
     filterType: "checkbox",
+    rowsSelected: selectedRows,
+    onRowsSelect: (currentRowsSelected, allRowsSelected) => {
+      setSelectedRows(allRowsSelected.map(row => row.dataIndex));
+      let dataIndex = [];
+      allRowsSelected.forEach(element => dataIndex.push(element.dataIndex));
+      const rowsSelected = props.adsDataTable.filter((value, index, array) =>
+        dataIndex.includes(index),
+      );
+      setSelectedAdIds(rowsSelected.map(obj => obj.ad_id));
+    },
+    onRowsDelete: () => {
+      setSelectedRows([]);
+      return false;
+    },
   };
 
   return (

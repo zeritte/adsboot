@@ -9,10 +9,7 @@ const INITIAL_STATE = { adsDataTable: [] };
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case GET_ALL_ADS_SUCCESS:
-      return {
-        ...state,
-        adsDataTable: action.payload
-      };
+      return { ...state, adsDataTable: action.payload };
     default:
       return state;
   }
