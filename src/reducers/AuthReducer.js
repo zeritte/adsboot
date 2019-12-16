@@ -42,7 +42,12 @@ export default (state = INITIAL_STATE, action) => {
     case SIGN_UP:
       return { ...state, signUpLoading: true, signUpError: null };
     case SIGN_UP_SUCCESS:
-      return { ...state, signUpMessage: action.payload, signUpLoading: false };
+      return {
+        ...state,
+        signUpMessage: action.payload,
+        signUpLoading: false,
+        isLoggedIn: true,
+      };
     case SIGN_UP_FAIL:
       return { ...state, signUpLoading: false, signUpError: action.payload };
     case FORGOT_PASSWORD:
