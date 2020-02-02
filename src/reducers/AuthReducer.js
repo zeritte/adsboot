@@ -13,7 +13,9 @@ import {
 } from "../actions/types";
 
 const INITIAL_STATE = {
-  isLoggedIn: false,
+  token: null,
+  firstname: null,
+  lastname: null,
   loginLoading: false,
   loginError: null,
   signUpLoading: false,
@@ -31,23 +33,26 @@ export default (state = INITIAL_STATE, action) => {
     case LOG_IN:
       return {
         ...state,
-        isLoggedIn: false,
+        token: null,
+        firstname: null,
+        lastname: null,
         loginLoading: true,
         loginError: null,
       };
     case LOG_IN_SUCCESS:
-      return { ...state, isLoggedIn: true, loginLoading: false };
+      return {
+        ...state,
+        loginLoading: false,
+        firstname: action.payload.name,
+        lastname: action.payload.surname,
+        token: `Bearer ${action.payload.jwt}`,
+      };
     case LOG_IN_FAIL:
       return { ...state, loginLoading: false, loginError: action.payload };
     case SIGN_UP:
       return { ...state, signUpLoading: true, signUpError: null };
     case SIGN_UP_SUCCESS:
-      return {
-        ...state,
-        signUpMessage: action.payload,
-        signUpLoading: false,
-        isLoggedIn: true,
-      };
+      return { ...state, signUpMessage: action.payload, signUpLoading: false };
     case SIGN_UP_FAIL:
       return { ...state, signUpLoading: false, signUpError: action.payload };
     case FORGOT_PASSWORD:

@@ -13,8 +13,8 @@ import { connect } from "react-redux";
 function App(props) {
   const [isAuthenticated, setIsAuth] = useState(false);
   useEffect(() => {
-    setIsAuth(props.isLoggedIn);
-  }, [props.isLoggedIn]);
+    setIsAuth(!!props.token);
+  }, [props.token]);
 
   return (
     <HashRouter>
@@ -77,7 +77,7 @@ function App(props) {
 }
 
 const mapStateToProps = state => {
-  const { isLoggedIn } = state.auth;
-  return { isLoggedIn };
+  const { token } = state.auth;
+  return { token };
 };
 export default connect(mapStateToProps)(App);

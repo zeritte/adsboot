@@ -1,7 +1,7 @@
-const base_url = "https://adsbot-api.herokuapp.com/dashboard/"; // production
+const base_url = "https://adsbotapi.herokuapp.com/api/"; // production
 
-const session = `${base_url}login`;
-const registration = `${base_url}signup`;
+const session = `${base_url}token`;
+const registration = `${base_url}user`;
 const password = `${base_url}passwords`;
 const getAllAds = `${base_url}getAds`;
 const runRules = `${base_url}run`;

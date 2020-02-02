@@ -20,7 +20,7 @@ export default (state = INITIAL_STATE, action) => {
     case GET_ALL_ADS_SUCCESS:
       return {
         ...state,
-        adsDataTable: action.payload,
+        adsDataTable: [], //action.payload
         adsDataTableLoading: false,
       };
     case GET_ALL_ADS_FAIL:

@@ -24,12 +24,13 @@ import { connect } from "react-redux";
 import { loginUser, signUp } from "../../actions/";
 
 function Login(props) {
-  var classes = useStyles();
+  const classes = useStyles();
 
-  var [activeTabId, setActiveTabId] = useState(0);
-  var [nameValue, setNameValue] = useState("");
-  var [loginValue, setLoginValue] = useState("");
-  var [passwordValue, setPasswordValue] = useState("");
+  const [activeTabId, setActiveTabId] = useState(0);
+  const [nameValue, setNameValue] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [loginValue, setLoginValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
 
   return (
     <Grid container className={classes.container}>
@@ -64,7 +65,7 @@ function Login(props) {
                 <div className={classes.formDivider} />
               </div>
               <Fade in={!!props.loginError}>
-                <Typography color="secondary" className={classes.errorMessage}>
+                <Typography color="secondary" className={classes.message}>
                   {props.loginError}
                 </Typography>
               </Fade>
@@ -97,6 +98,10 @@ function Login(props) {
                 placeholder="Password"
                 type="password"
                 fullWidth
+                onKeyDown={e =>
+                  e.key === "Enter" &&
+                  props.loginUser(loginValue, passwordValue)
+                }
               />
               <div className={classes.formButtons}>
                 {props.loginLoading ? (
@@ -133,8 +138,13 @@ function Login(props) {
                 Create your account
               </Typography>
               <Fade in={!!props.signUpError}>
-                <Typography color="secondary" className={classes.errorMessage}>
+                <Typography color="secondary" className={classes.message}>
                   {props.signUpError}
+                </Typography>
+              </Fade>
+              <Fade in={!props.signUpMessage}>
+                <Typography color="primary" className={classes.message}>
+                  {props.signUpMessage}
                 </Typography>
               </Fade>
               <TextField
@@ -148,8 +158,21 @@ function Login(props) {
                 value={nameValue}
                 onChange={e => setNameValue(e.target.value)}
                 margin="normal"
-                placeholder="Full Name"
-                type="email"
+                placeholder="First Name"
+                fullWidth
+              />
+              <TextField
+                id="lastname"
+                InputProps={{
+                  classes: {
+                    underline: classes.textFieldUnderline,
+                    input: classes.textField,
+                  },
+                }}
+                value={lastname}
+                onChange={e => setLastname(e.target.value)}
+                margin="normal"
+                placeholder="Last Name"
                 fullWidth
               />
               <TextField
@@ -181,6 +204,10 @@ function Login(props) {
                 placeholder="Password"
                 type="password"
                 fullWidth
+                onKeyDown={e =>
+                  e.key === "Enter" &&
+                  props.signUp(nameValue, lastname, loginValue, passwordValue)
+                }
               />
               <div className={classes.creatingButtonContainer}>
                 {props.signUpLoading ? (
@@ -188,7 +215,12 @@ function Login(props) {
                 ) : (
                   <Button
                     onClick={() =>
-                      props.signUp(nameValue, loginValue, passwordValue)
+                      props.signUp(
+                        nameValue,
+                        lastname,
+                        loginValue,
+                        passwordValue,
+                      )
                     }
                     disabled={
                       loginValue.length === 0 ||
@@ -236,10 +268,18 @@ const mapStateToProps = state => {
     isLoggedIn,
     loginLoading,
     signUpLoading,
+    signUpMessage,
     loginError,
     signUpError,
   } = state.auth;
-  return { isLoggedIn, loginLoading, signUpLoading, loginError, signUpError };
+  return {
+    isLoggedIn,
+    loginLoading,
+    signUpLoading,
+    signUpMessage,
+    loginError,
+    signUpError,
+  };
 };
 
 export default compose(
