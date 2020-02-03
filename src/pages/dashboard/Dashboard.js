@@ -21,6 +21,8 @@ import {
   XAxis,
 } from "recharts";
 
+import { Redirect } from "react-router-dom";
+
 // styles
 import useStyles from "./styles";
 
@@ -33,6 +35,8 @@ import Dot from "../../components/Sidebar/components/Dot";
 import Table from "./components/Table/Table";
 import BigStat from "./components/BigStat/BigStat";
 
+import { useSelector } from "react-redux";
+
 const mainChartData = getMainChartData();
 const PieChartData = [
   { name: "Group A", value: 400, color: "primary" },
@@ -42,11 +46,16 @@ const PieChartData = [
 ];
 
 export default function Dashboard(props) {
+  const shouldVisitTokenScreen = useSelector(
+    state => state.auth.shouldVisitTokenScreen,
+  );
   var classes = useStyles();
   var theme = useTheme();
 
   // local
   var [mainChartState, setMainChartState] = useState("monthly");
+
+  if (shouldVisitTokenScreen) return <Redirect to="/app/tokens" />;
 
   return (
     <>

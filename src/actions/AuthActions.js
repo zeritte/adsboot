@@ -11,6 +11,7 @@ import {
   FORGOT_FAIL,
   FORGOT_PASSWORD,
   FORGOT_SUCCESS,
+  SET_SHOULD_VISIT_TOKEN_SCREEN,
 } from "./types";
 import urls from "../urls";
 
@@ -23,7 +24,8 @@ export const loginUser = (email, password) => dispatch => {
   axios
     .post(urls.session, { email, password })
     .then(response => {
-      dispatch({ type: LOG_IN_SUCCESS, payload: response.data.data });
+      dispatch({ type: LOG_IN_SUCCESS, payload: response.data });
+      dispatch(setShouldVisitTokenScreen(response.data.status.code === 3000));
     })
     .catch(error => {
       dispatch({
@@ -70,3 +72,6 @@ export const signUp = (fname, lname, email, password) => dispatch => {
       });
     });
 };
+
+export const setShouldVisitTokenScreen = bool => dispatch =>
+  dispatch({ type: SET_SHOULD_VISIT_TOKEN_SCREEN, payload: bool });

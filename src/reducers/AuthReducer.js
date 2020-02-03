@@ -9,11 +9,13 @@ import {
   FORGOT_PASSWORD,
   FORGOT_FAIL,
   SET_ITEM,
+  SET_SHOULD_VISIT_TOKEN_SCREEN,
   LOG_OUT,
 } from "../actions/types";
 
 const INITIAL_STATE = {
   token: null,
+  shouldVisitTokenScreen: false,
   firstname: null,
   lastname: null,
   loginLoading: false,
@@ -38,14 +40,15 @@ export default (state = INITIAL_STATE, action) => {
         lastname: null,
         loginLoading: true,
         loginError: null,
+        shouldVisitTokenScreen: false,
       };
     case LOG_IN_SUCCESS:
       return {
         ...state,
         loginLoading: false,
-        firstname: action.payload.name,
-        lastname: action.payload.surname,
-        token: `Bearer ${action.payload.jwt}`,
+        firstname: action.payload.data.name,
+        lastname: action.payload.data.surname,
+        token: `Bearer ${action.payload.data.jwt}`,
       };
     case LOG_IN_FAIL:
       return { ...state, loginLoading: false, loginError: action.payload };
@@ -61,6 +64,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, forgotLoading: false, forgotMessage: action.payload };
     case FORGOT_FAIL:
       return { ...state, forgotLoading: false, forgotError: action.payload };
+    case SET_SHOULD_VISIT_TOKEN_SCREEN:
+      return { ...state, shouldVisitTokenScreen: action.payload };
     case LOG_OUT:
       return { ...INITIAL_STATE };
     default:

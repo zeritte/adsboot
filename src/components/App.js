@@ -7,6 +7,7 @@ import Layout from "./Layout";
 // pages
 import Error from "../pages/error";
 import Login from "../pages/login";
+import Tokens from "../pages/tokens";
 
 import { connect } from "react-redux";
 

@@ -31,6 +31,7 @@ import {
 
 const structure = [
   { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
+  { id: 13, label: "Tokens", link: "/app/tokens", icon: <LibraryIcon /> },
   {
     id: 1,
     label: "Campaigns",
