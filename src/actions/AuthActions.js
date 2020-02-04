@@ -75,3 +75,26 @@ export const signUp = (fname, lname, email, password) => dispatch => {
 
 export const setShouldVisitTokenScreen = bool => dispatch =>
   dispatch({ type: SET_SHOULD_VISIT_TOKEN_SCREEN, payload: bool });
+
+export const updateTokens = (
+  clientId,
+  clientSecret,
+  refreshToken,
+  developerToken,
+) => (dispatch, getState) => {
+  axios
+    .post(
+      urls.updateTokens,
+      {
+        clientId,
+        clientSecret,
+        refreshToken,
+        developerToken,
+      },
+      { headers: { Authorization: getState().auth.token } },
+    )
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => console.log(error.response));
+};

@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Grid } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import { Grid, TextField, Button } from "@material-ui/core";
 
 // styles
 import useStyles from "./styles";
@@ -7,124 +7,107 @@ import useStyles from "./styles";
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Widget from "../../components/Widget/Widget";
-import { Typography } from "../../components/Wrappers/Wrappers";
 
 import { useDispatch } from "react-redux";
-import { setShouldVisitTokenScreen } from "../../actions";
+import { setShouldVisitTokenScreen, updateTokens } from "../../actions";
 
 export default function TokensPage() {
+  const [clientId, setClientId] = useState("");
+  const [clientSecret, setClientSecret] = useState("");
+  const [developerToken, setDeveloperToken] = useState("");
+  const [refreshToken, setRefreshToken] = useState("");
+
   var classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setShouldVisitTokenScreen(false));
+    // eslint-disable-next-line
   }, []);
 
   return (
     <>
       <PageTitle title="Tokens" />
       <Grid container spacing={4}>
-        <Grid item xs={12} md={6}>
-          <Widget title="Headings" disableWidgetMenu>
+        <Grid item xs={12} md={12}>
+          <Widget title="Enter your credentials" disableWidgetMenu>
             <div className={classes.dashedBorder}>
-              <Typography variant="h1" className={classes.text}>
-                h1. HEYYYY
-              </Typography>
-              <Typography variant="h2" className={classes.text}>
-                h2. Heading
-              </Typography>
-              <Typography variant="h3" className={classes.text}>
-                h3. Heading
-              </Typography>
-              <Typography variant="h4" className={classes.text}>
-                h4. Heading
-              </Typography>
-              <Typography variant="h5" className={classes.text}>
-                h5. Heading
-              </Typography>
-              <Typography variant="h6">h6. Heading</Typography>
-            </div>
-          </Widget>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Widget title="Typography Colors" disableWidgetMenu>
-            <div className={classes.dashedBorder}>
-              <Typography variant="h1" color="primary" className={classes.text}>
-                h1. Heading
-              </Typography>
-              <Typography variant="h2" color="success" className={classes.text}>
-                h2. Heading
-              </Typography>
-              <Typography
-                variant="h3"
-                color="secondary"
-                className={classes.text}
-              >
-                h3. Heading
-              </Typography>
-              <Typography variant="h4" color="warning" className={classes.text}>
-                h4. Heading
-              </Typography>
-              <Typography
-                variant="h5"
-                color="primary"
-                colorBrightness="light"
-                className={classes.text}
-              >
-                h5. Heading
-              </Typography>
-              <Typography variant="h6" color="info">
-                h6. Heading
-              </Typography>
-            </div>
-          </Widget>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Widget title="Basic Text Settings" disableWidgetMenu>
-            <div className={classes.dashedBorder}>
-              <Typography className={classes.text}>Basic text</Typography>
-              <Typography className={classes.text} weight="light">
-                Basic light text
-              </Typography>
-              <Typography className={classes.text} weight="medium">
-                Basic medium text
-              </Typography>
-              <Typography className={classes.text} weight="bold">
-                Basic bold text
-              </Typography>
-              <Typography className={classes.text}>
-                BASIC UPPERCASE TEXT
-              </Typography>
-              <Typography className={classes.text}>
-                basic lowercase text
-              </Typography>
-              <Typography className={classes.text}>
-                Basic Capitalized Text
-              </Typography>
-              <Typography>
-                <i>Basic Cursive Text</i>
-              </Typography>
-            </div>
-          </Widget>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Widget title="Text Size" disableWidgetMenu>
-            <div className={classes.dashedBorder}>
-              <Typography className={classes.text} size="sm">
-                Heading Typography SM Font Size
-              </Typography>
-              <Typography className={classes.text}>
-                Heading Typography Regular Font Size
-              </Typography>
-              <Typography className={classes.text} size="md">
-                Heading Typography MD Font Size
-              </Typography>
-              <Typography className={classes.text} size="xl">
-                Heading Typography XL Font Size
-              </Typography>
-              <Typography className={classes.text} size="xxl">
-                Heading Typography XXL Font Size
-              </Typography>
+              <TextField
+                id="clientId"
+                InputProps={{
+                  classes: {
+                    underline: classes.textFieldUnderline,
+                    input: classes.textField,
+                  },
+                }}
+                value={clientId}
+                onChange={e => setClientId(e.target.value)}
+                margin="normal"
+                placeholder="Client Id"
+                fullWidth
+              />
+              <TextField
+                id="clientSecret"
+                InputProps={{
+                  classes: {
+                    underline: classes.textFieldUnderline,
+                    input: classes.textField,
+                  },
+                }}
+                value={clientSecret}
+                onChange={e => setClientSecret(e.target.value)}
+                margin="normal"
+                placeholder="Client Secret"
+                fullWidth
+              />
+              <TextField
+                id="refreshToken"
+                InputProps={{
+                  classes: {
+                    underline: classes.textFieldUnderline,
+                    input: classes.textField,
+                  },
+                }}
+                value={refreshToken}
+                onChange={e => setRefreshToken(e.target.value)}
+                margin="normal"
+                placeholder="Refresh Token"
+                fullWidth
+              />
+              <TextField
+                id="developerToken"
+                InputProps={{
+                  classes: {
+                    underline: classes.textFieldUnderline,
+                    input: classes.textField,
+                  },
+                }}
+                value={developerToken}
+                onChange={e => setDeveloperToken(e.target.value)}
+                margin="normal"
+                placeholder="Developer Token"
+                fullWidth
+              />
+              <div className={classes.buttonContainer}>
+                <Button
+                  onClick={() =>
+                    dispatch(
+                      updateTokens(
+                        clientId,
+                        clientSecret,
+                        refreshToken,
+                        developerToken,
+                      ),
+                    )
+                  }
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  fullWidth
+                >
+                  UPDATE
+                </Button>
+              </div>
             </div>
           </Widget>
         </Grid>

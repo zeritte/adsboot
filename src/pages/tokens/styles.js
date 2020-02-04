@@ -10,6 +10,23 @@ export default makeStyles(theme => ({
     marginTop: theme.spacing(1),
   },
   text: {
-    marginBottom: theme.spacing(2),
+    marginBottom: theme.spacing(4),
+  },
+  textFieldUnderline: {
+    "&:before": {
+      borderBottomColor: theme.palette.primary.light,
+    },
+    "&:after": {
+      borderBottomColor: theme.palette.primary.main,
+    },
+    "&:hover:before": {
+      borderBottomColor: `${theme.palette.primary.light} !important`,
+    },
+  },
+  textField: {
+    borderBottomColor: theme.palette.background.light,
+  },
+  buttonContainer: {
+    marginTop: theme.spacing(4),
   },
 }));
