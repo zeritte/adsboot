@@ -297,7 +297,7 @@ function Header(props) {
               classes.headerMenuItem,
             )}
           >
-            <AccountIcon className={classes.profileMenuIcon} /> Account1
+            <AccountIcon className={classes.profileMenuIcon} /> Project 1
           </MenuItem>
           <MenuItem
             className={classNames(
@@ -305,7 +305,7 @@ function Header(props) {
               classes.headerMenuItem,
             )}
           >
-            <AccountIcon className={classes.profileMenuIcon} /> Account2
+            <AccountIcon className={classes.profileMenuIcon} /> Project 2
           </MenuItem>
           <MenuItem
             className={classNames(
@@ -313,7 +313,7 @@ function Header(props) {
               classes.headerMenuItem,
             )}
           >
-            <AccountIcon className={classes.profileMenuIcon} /> Account3
+            <AccountIcon className={classes.profileMenuIcon} /> Project 3
           </MenuItem>
           <div className={classes.profileMenuUser}>
             <Typography
