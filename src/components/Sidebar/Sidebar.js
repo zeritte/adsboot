@@ -29,7 +29,10 @@ import {
   toggleSidebar,
 } from "../../context/LayoutContext";
 
-const structure = [
+import { useSelector, useDispatch } from "react-redux";
+import { selectProject } from "../../actions";
+
+const baseStructure = [
   { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
   { id: 13, label: "Tokens", link: "/app/tokens", icon: <LibraryIcon /> },
   {
@@ -55,14 +58,8 @@ const structure = [
   { id: 6, label: "Form Parameters", link: "", icon: <SupportIcon /> },
   { id: 7, label: "Report", link: "/app/tables", icon: <TableIcon /> },
   { id: 8, label: "History", link: "", icon: <UIElementsIcon /> },
-  // { id: 9, type: "divider" },
+  { id: 9, type: "divider" },
   // { id: 10, type: "title", label: "HELP" },
-  // {
-  //   id: 11,
-  //   label: "Link",
-  //   link: "",
-  //   icon: <Dot size="large" color="primary" />,
-  // },
   // {
   //   id: 12,
   //   label: "Feed",
@@ -76,9 +73,28 @@ const structure = [
   // },
 ];
 
-function Sidebar({ location }) {
+function Sidebar(props) {
+  const { location } = props;
+  const projects = useSelector(state => state.ad.projects);
+  const selectedProjectId = useSelector(state => state.ad.selectedProjectId);
+  const dispatch = useDispatch();
   var classes = useStyles();
   var theme = useTheme();
+
+  const structure = [
+    ...baseStructure,
+    ...projects.map(p => ({
+      id: p.projectId,
+      label: p.projectName,
+      link: () => dispatch(selectProject(p.projectId)),
+      icon: (
+        <Dot
+          size="large"
+          color={p.projectId === selectedProjectId ? "secondary" : "primary"}
+        />
+      ),
+    })),
+  ];
 
   // global
   var { isSidebarOpened } = useLayoutState();

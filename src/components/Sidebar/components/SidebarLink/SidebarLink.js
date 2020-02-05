@@ -49,12 +49,19 @@ export default function SidebarLink({
 
   if (type === "divider") return <Divider className={classes.divider} />;
 
+  let toOrOnClick = {};
+  if (typeof link === "string") {
+    toOrOnClick = { to: link };
+  } else {
+    toOrOnClick = { onClick: link };
+  }
+
   if (!children)
     return (
       <ListItem
         button
-        component={link && Link}
-        to={link}
+        component={typeof link === "string" ? Link : "button"}
+        {...toOrOnClick}
         className={classes.link}
         classes={{
           root: classnames(classes.linkRoot, {

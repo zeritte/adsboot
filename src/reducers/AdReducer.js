@@ -11,11 +11,11 @@ import {
 
 const INITIAL_STATE = {
   projects: [
-    { projectName: "Project 1", projectId: 1 },
-    { projectName: "Project 2", projectId: 2 },
-    { projectName: "Project 3", projectId: 3 },
+    { projectName: "Project 1", projectId: 11111 },
+    { projectName: "Project 2", projectId: 22222 },
+    { projectName: "Project 3", projectId: 33333 },
   ],
-  selectedProjectId: 1,
+  selectedProjectId: 11111,
   adsDataTable: [],
   adsDataTableLoading: false,
   adsDataTableError: null,
