@@ -137,6 +137,7 @@ export default function TokensPage() {
                       ),
                     )
                   }
+                  disabled={clientTokensLoading}
                   variant="contained"
                   color="primary"
                   size="large"
