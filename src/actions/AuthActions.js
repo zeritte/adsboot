@@ -20,6 +20,7 @@ import {
   GET_TOKENS_FAIL,
 } from "./types";
 import urls from "../urls";
+import { getProjects } from "./AdActions";
 
 export const setItem = (prop, value) => dispatch => {
   dispatch({ type: SET_ITEM, payload: { prop, value } });
@@ -32,6 +33,7 @@ export const loginUser = (email, password) => dispatch => {
     .then(response => {
       dispatch({ type: LOG_IN_SUCCESS, payload: response.data });
       dispatch(setShouldVisitTokenScreen(response.data.status.code === 3000));
+      dispatch(getProjects());
     })
     .catch(error => {
       dispatch({
@@ -123,6 +125,7 @@ export const updateTokens = (
         payload: response.data.status.message,
       });
       dispatch(getTokens());
+      dispatch(getProjects());
     })
     .catch(error => {
       dispatch({

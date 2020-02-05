@@ -29,7 +29,7 @@ const persistConfig = {
   stateReconciler: autoMergeLevel2,
   transforms: [
     createWhitelistFilter("auth", ["firstname", "lastname", "token"]),
-    createWhitelistFilter("ad", []),
+    createWhitelistFilter("ad", ["projects", "selectedProjectId"]),
   ],
 };
 

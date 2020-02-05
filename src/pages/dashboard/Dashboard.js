@@ -57,10 +57,6 @@ export default function Dashboard(props) {
   // local
   var [mainChartState, setMainChartState] = useState("monthly");
 
-  useEffect(() => {
-    dispatch(getProjects());
-  }, []);
-
   if (shouldVisitTokenScreen) return <Redirect to="/app/tokens" />;
 
   return (
