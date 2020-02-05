@@ -5,6 +5,7 @@ const registration = `${base_url}user`;
 const password = `${base_url}passwords`;
 const clientTokens = `${base_url}client-token`;
 const projects = `${base_url}projects`;
+const projectParams = projectId => `${base_url}projects/${projectId}/rule-parameters`;
 const getAllAds = `${base_url}getAds`;
 const runRules = `${base_url}run`;
 
@@ -15,6 +16,7 @@ export default {
   password,
   clientTokens,
   projects,
+  projectParams,
   getAllAds,
   runRules,
 };

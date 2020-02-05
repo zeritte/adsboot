@@ -20,7 +20,12 @@ export const UPDATE_TOKENS_SUCCESS = "update_tokens_success";
 export const UPDATE_TOKENS_FAIL = "update_tokens_fail";
 
 export const FETCH_PROJECTS = "fetch_projects";
-export const SELECT_PROJECT = "select_project";
+export const GET_PROJECT_PARAMS = "get_project_params";
+export const GET_PROJECT_PARAMS_SUCCESS = "get_project_params_success";
+export const GET_PROJECT_PARAMS_FAIL = "get_project_params_fail";
+export const UPDATE_PROJECT_PARAMS = "update_project_params";
+export const UPDATE_PROJECT_PARAMS_SUCCESS = "update_project_params_success";
+export const UPDATE_PROJECT_PARAMS_FAIL = "update_project_params_fail";
 export const GET_ALL_ADS = "get_all_ads";
 export const GET_ALL_ADS_SUCCESS = "get_all_ads_success";
 export const GET_ALL_ADS_FAIL = "get_all_ads_fail";

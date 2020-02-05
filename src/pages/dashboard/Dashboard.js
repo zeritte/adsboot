@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Grid,
   LinearProgress,
@@ -35,8 +35,8 @@ import Dot from "../../components/Sidebar/components/Dot";
 import Table from "./components/Table/Table";
 import BigStat from "./components/BigStat/BigStat";
 
+// eslint-disable-next-line
 import { useSelector, useDispatch } from "react-redux";
-import { getProjects } from "../../actions";
 
 const mainChartData = getMainChartData();
 const PieChartData = [
@@ -50,7 +50,7 @@ export default function Dashboard(props) {
   const shouldVisitTokenScreen = useSelector(
     state => state.auth.shouldVisitTokenScreen,
   );
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   var classes = useStyles();
   var theme = useTheme();
 

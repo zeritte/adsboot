@@ -35,7 +35,12 @@ import { selectProject } from "../../actions";
 const baseStructure = [
   { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
   { id: 13, label: "Tokens", link: "/app/tokens", icon: <LibraryIcon /> },
-  { id: 14, label: "Project Parameters", link: "", icon: <SupportIcon /> },
+  {
+    id: 14,
+    label: "Project Parameters",
+    link: "/app/project_params",
+    icon: <SupportIcon />,
+  },
   {
     id: 1,
     label: "Campaigns",
