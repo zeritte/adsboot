@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Grid, TextField, Button } from "@material-ui/core";
+import {
+  Grid,
+  TextField,
+  Button,
+  Typography,
+  CircularProgress,
+} from "@material-ui/core";
 
 // styles
 import useStyles from "./styles";
@@ -8,22 +14,47 @@ import useStyles from "./styles";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Widget from "../../components/Widget/Widget";
 
-import { useDispatch } from "react-redux";
-import { setShouldVisitTokenScreen, updateTokens } from "../../actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setShouldVisitTokenScreen,
+  updateTokens,
+  getTokens,
+} from "../../actions";
 
 export default function TokensPage() {
   const [clientId, setClientId] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [developerToken, setDeveloperToken] = useState("");
   const [refreshToken, setRefreshToken] = useState("");
+  const clientTokens = useSelector(state => state.auth.clientTokens);
+  const clientTokensLoading = useSelector(
+    state => state.auth.clientTokensLoading,
+  );
+  const clientTokensError = useSelector(state => state.auth.clientTokensError);
+  const clientTokensMessage = useSelector(
+    state => state.auth.clientTokensMessage,
+  );
 
   var classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(getTokens());
+  }, []);
+
+  useEffect(() => {
     dispatch(setShouldVisitTokenScreen(false));
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (clientTokens && clientTokens.clientId) {
+      setClientId(clientTokens.clientId);
+      setClientSecret(clientTokens.clientSecret);
+      setDeveloperToken(clientTokens.developerToken);
+      setRefreshToken(clientTokens.refreshToken);
+    }
+  }, [clientTokens]);
 
   return (
     <>
@@ -32,6 +63,15 @@ export default function TokensPage() {
         <Grid item xs={12} md={12}>
           <Widget title="Enter your credentials" disableWidgetMenu>
             <div className={classes.dashedBorder}>
+              <center>
+                {clientTokensLoading ? (
+                  <CircularProgress size={26} />
+                ) : clientTokensError ? (
+                  <Typography color="secondary">{clientTokensError}</Typography>
+                ) : (
+                  <Typography color="primary">{clientTokensMessage}</Typography>
+                )}
+              </center>
               <TextField
                 id="clientId"
                 InputProps={{

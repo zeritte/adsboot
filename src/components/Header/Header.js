@@ -16,6 +16,7 @@ import {
   Search as SearchIcon,
   Send as SendIcon,
   ArrowBack as ArrowBackIcon,
+  Assignment as AssignmentIcon,
 } from "@material-ui/icons";
 import classNames from "classnames";
 
@@ -104,6 +105,12 @@ function Header(props) {
   var [isNotificationsUnread, setIsNotificationsUnread] = useState(true);
   var [profileMenu, setProfileMenu] = useState(null);
   var [isSearchOpen, setSearchOpen] = useState(false);
+
+  const projects = [
+    { name: "Project 1" },
+    { name: "Project 2" },
+    { name: "Project 3" },
+  ];
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -291,30 +298,18 @@ function Header(props) {
               {props.name}
             </Typography>
           </div>
-          <MenuItem
-            className={classNames(
-              classes.profileMenuItem,
-              classes.headerMenuItem,
-            )}
-          >
-            <AccountIcon className={classes.profileMenuIcon} /> Project 1
-          </MenuItem>
-          <MenuItem
-            className={classNames(
-              classes.profileMenuItem,
-              classes.headerMenuItem,
-            )}
-          >
-            <AccountIcon className={classes.profileMenuIcon} /> Project 2
-          </MenuItem>
-          <MenuItem
-            className={classNames(
-              classes.profileMenuItem,
-              classes.headerMenuItem,
-            )}
-          >
-            <AccountIcon className={classes.profileMenuIcon} /> Project 3
-          </MenuItem>
+          {projects.map(p => (
+            <MenuItem
+              key={p.name}
+              className={classNames(
+                classes.profileMenuItem,
+                classes.headerMenuItem,
+              )}
+            >
+              <AssignmentIcon className={classes.profileMenuIcon} />
+              {p.name}
+            </MenuItem>
+          ))}
           <div className={classes.profileMenuUser}>
             <Typography
               className={classes.profileMenuLink}

@@ -11,6 +11,12 @@ import {
   SET_ITEM,
   SET_SHOULD_VISIT_TOKEN_SCREEN,
   LOG_OUT,
+  GET_TOKENS,
+  GET_TOKENS_FAIL,
+  GET_TOKENS_SUCCESS,
+  UPDATE_TOKENS,
+  UPDATE_TOKENS_SUCCESS,
+  UPDATE_TOKENS_FAIL,
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -26,6 +32,10 @@ const INITIAL_STATE = {
   forgotLoading: false,
   forgotMessage: null,
   forgotError: null,
+  clientTokens: null,
+  clientTokensLoading: false,
+  clientTokensError: null,
+  clientTokensMessage: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -66,6 +76,49 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, forgotLoading: false, forgotError: action.payload };
     case SET_SHOULD_VISIT_TOKEN_SCREEN:
       return { ...state, shouldVisitTokenScreen: action.payload };
+    case GET_TOKENS:
+      return {
+        ...state,
+        clientTokens: null,
+        clientTokensError: null,
+        clientTokensLoading: true,
+      };
+    case GET_TOKENS_SUCCESS:
+      return {
+        ...state,
+        clientTokens: {
+          clientId: action.payload.clientId,
+          clientSecret: action.payload.clientSecret,
+          developerToken: action.payload.developerToken,
+          refreshToken: action.payload.refreshToken,
+        },
+        clientTokensLoading: false,
+      };
+    case GET_TOKENS_FAIL:
+      return {
+        ...state,
+        clientTokensLoading: false,
+        clientTokensError: action.payload,
+      };
+    case UPDATE_TOKENS:
+      return {
+        ...state,
+        clientTokensMessage: null,
+        clientTokensLoading: true,
+        clientTokensError: null,
+      };
+    case UPDATE_TOKENS_SUCCESS:
+      return {
+        ...state,
+        clientTokensMessage: action.payload,
+        clientTokensLoading: false,
+      };
+    case UPDATE_TOKENS_FAIL:
+      return {
+        ...state,
+        clientTokensError: action.payload,
+        clientTokensLoading: false,
+      };
     case LOG_OUT:
       return { ...INITIAL_STATE };
     default:

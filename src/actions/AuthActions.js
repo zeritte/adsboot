@@ -8,10 +8,17 @@ import {
   SIGN_UP,
   SIGN_UP_SUCCESS,
   SIGN_UP_FAIL,
-  FORGOT_FAIL,
-  FORGOT_PASSWORD,
-  FORGOT_SUCCESS,
+  // FORGOT_FAIL,
+  // FORGOT_PASSWORD,
+  // FORGOT_SUCCESS,
   SET_SHOULD_VISIT_TOKEN_SCREEN,
+  GET_TOKENS,
+  GET_TOKENS_SUCCESS,
+  GET_ALL_ADS_FAIL,
+  UPDATE_TOKENS,
+  UPDATE_TOKENS_FAIL,
+  UPDATE_TOKENS_SUCCESS,
+  GET_TOKENS_FAIL,
 } from "./types";
 import urls from "../urls";
 
@@ -76,15 +83,35 @@ export const signUp = (fname, lname, email, password) => dispatch => {
 export const setShouldVisitTokenScreen = bool => dispatch =>
   dispatch({ type: SET_SHOULD_VISIT_TOKEN_SCREEN, payload: bool });
 
+export const getTokens = () => (dispatch, getState) => {
+  dispatch({ type: GET_TOKENS });
+  axios
+    .get(urls.clientTokens, {
+      headers: {
+        Authorization: getState().auth.token,
+      },
+    })
+    .then(response => {
+      dispatch({ type: GET_TOKENS_SUCCESS, payload: response.data.data });
+    })
+    .catch(error => {
+      dispatch({
+        type: GET_TOKENS_FAIL,
+        payload: error.response.data.status.message,
+      });
+    });
+};
+
 export const updateTokens = (
   clientId,
   clientSecret,
   refreshToken,
   developerToken,
 ) => (dispatch, getState) => {
+  dispatch({ type: UPDATE_TOKENS });
   axios
     .post(
-      urls.updateTokens,
+      urls.clientTokens,
       {
         clientId,
         clientSecret,
@@ -94,7 +121,16 @@ export const updateTokens = (
       { headers: { Authorization: getState().auth.token } },
     )
     .then(response => {
-      console.log(response.data);
+      dispatch({
+        type: UPDATE_TOKENS_SUCCESS,
+        payload: response.data.status.message,
+      });
+      dispatch(getTokens());
     })
-    .catch(error => console.log(error.response));
+    .catch(error => {
+      dispatch({
+        type: UPDATE_TOKENS_FAIL,
+        payload: error.response.data.status.message,
+      });
+    });
 };

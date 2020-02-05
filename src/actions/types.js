@@ -12,6 +12,12 @@ export const FORGOT_PASSWORD = "forgot_password";
 export const FORGOT_SUCCESS = "forgot_success";
 export const FORGOT_FAIL = "forgot_fail";
 export const SET_SHOULD_VISIT_TOKEN_SCREEN = "set_should_visit_token_screen";
+export const GET_TOKENS = "get_tokens";
+export const GET_TOKENS_SUCCESS = "get_tokens_success";
+export const GET_TOKENS_FAIL = "get_tokens_fail";
+export const UPDATE_TOKENS = "update_tokens";
+export const UPDATE_TOKENS_SUCCESS = "update_tokens_success";
+export const UPDATE_TOKENS_FAIL = "update_tokens_fail";
 
 export const GET_ALL_ADS = "get_all_ads";
 export const GET_ALL_ADS_SUCCESS = "get_all_ads_success";
