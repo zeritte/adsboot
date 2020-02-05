@@ -36,7 +36,7 @@ import {
 } from "../../context/LayoutContext";
 
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions";
+import { logoutUser, selectProject } from "../../actions";
 
 const messages = [
   {
@@ -105,12 +105,6 @@ function Header(props) {
   var [isNotificationsUnread, setIsNotificationsUnread] = useState(true);
   var [profileMenu, setProfileMenu] = useState(null);
   var [isSearchOpen, setSearchOpen] = useState(false);
-
-  const projects = [
-    { name: "Project 1" },
-    { name: "Project 2" },
-    { name: "Project 3" },
-  ];
 
   return (
     <AppBar position="fixed" className={classes.appBar}>
@@ -298,16 +292,18 @@ function Header(props) {
               {props.name}
             </Typography>
           </div>
-          {projects.map(p => (
+          {props.projects.map(p => (
             <MenuItem
-              key={p.name}
-              className={classNames(
-                classes.profileMenuItem,
-                classes.headerMenuItem,
-              )}
+              onClick={() => props.selectProject(p.projectId)}
+              key={p.projectId}
+              className={
+                p.projectId === props.selectedProjectId
+                  ? classNames(classes.selectedProfileMenuItem)
+                  : classNames(classes.profileMenuItem, classes.headerMenuItem)
+              }
             >
               <AssignmentIcon className={classes.profileMenuIcon} />
-              {p.name}
+              {p.projectName}
             </MenuItem>
           ))}
           <div className={classes.profileMenuUser}>
@@ -325,8 +321,12 @@ function Header(props) {
   );
 }
 
-const mapStateToProps = ({ auth }) => {
-  return { name: `${auth.firstname} ${auth.lastname}` };
+const mapStateToProps = ({ auth, ad }) => {
+  return {
+    name: `${auth.firstname} ${auth.lastname}`,
+    projects: ad.projects,
+    selectedProjectId: ad.selectedProjectId,
+  };
 };
 
-export default connect(mapStateToProps, { logoutUser })(Header);
+export default connect(mapStateToProps, { logoutUser, selectProject })(Header);

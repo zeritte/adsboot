@@ -19,6 +19,8 @@ export const UPDATE_TOKENS = "update_tokens";
 export const UPDATE_TOKENS_SUCCESS = "update_tokens_success";
 export const UPDATE_TOKENS_FAIL = "update_tokens_fail";
 
+export const FETCH_PROJECTS = "fetch_projects";
+export const SELECT_PROJECT = "select_project";
 export const GET_ALL_ADS = "get_all_ads";
 export const GET_ALL_ADS_SUCCESS = "get_all_ads_success";
 export const GET_ALL_ADS_FAIL = "get_all_ads_fail";

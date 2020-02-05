@@ -1,5 +1,7 @@
 import axios from "axios";
 import {
+  FETCH_PROJECTS,
+  SELECT_PROJECT,
   GET_ALL_ADS,
   GET_ALL_ADS_FAIL,
   GET_ALL_ADS_SUCCESS,
@@ -8,6 +10,23 @@ import {
   RUN_RULES_SUCCESS,
 } from "./types";
 import urls from "../urls";
+
+export const getProjects = () => (dispatch, getState) => {
+  axios
+    .get(urls.projects, {
+      headers: { Authorization: getState().auth.token },
+    })
+    .then(response => {
+      console.log(response.data);
+      // dispatch({ type: FETCH_PROJECTS, payload: response.data.data });
+    })
+    .catch(error => {
+      console.log(error.response);
+    });
+};
+
+export const selectProject = id => dispatch =>
+  dispatch({ type: SELECT_PROJECT, payload: id });
 
 export const getAllAds = () => dispatch => {
   dispatch({ type: GET_ALL_ADS });

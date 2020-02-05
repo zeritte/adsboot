@@ -14,7 +14,6 @@ import {
   SET_SHOULD_VISIT_TOKEN_SCREEN,
   GET_TOKENS,
   GET_TOKENS_SUCCESS,
-  GET_ALL_ADS_FAIL,
   UPDATE_TOKENS,
   UPDATE_TOKENS_FAIL,
   UPDATE_TOKENS_SUCCESS,
@@ -87,9 +86,7 @@ export const getTokens = () => (dispatch, getState) => {
   dispatch({ type: GET_TOKENS });
   axios
     .get(urls.clientTokens, {
-      headers: {
-        Authorization: getState().auth.token,
-      },
+      headers: { Authorization: getState().auth.token },
     })
     .then(response => {
       dispatch({ type: GET_TOKENS_SUCCESS, payload: response.data.data });

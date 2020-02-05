@@ -40,9 +40,6 @@ export default function TokensPage() {
 
   useEffect(() => {
     dispatch(getTokens());
-  }, []);
-
-  useEffect(() => {
     dispatch(setShouldVisitTokenScreen(false));
     // eslint-disable-next-line
   }, []);

@@ -118,6 +118,12 @@ export default makeStyles(theme => ({
   profileMenuItem: {
     color: theme.palette.text.hint,
   },
+  selectedProfileMenuItem: {
+    "&, &:hover, &:focus": {
+      backgroundColor: theme.palette.secondary.main,
+      color: "white",
+    },
+  },
   profileMenuIcon: {
     marginRight: theme.spacing(2),
     color: theme.palette.text.hint,

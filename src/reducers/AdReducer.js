@@ -1,4 +1,6 @@
 import {
+  FETCH_PROJECTS,
+  SELECT_PROJECT,
   GET_ALL_ADS,
   GET_ALL_ADS_FAIL,
   GET_ALL_ADS_SUCCESS,
@@ -8,6 +10,12 @@ import {
 } from "../actions/types";
 
 const INITIAL_STATE = {
+  projects: [
+    { projectName: "Project 1", projectId: 1 },
+    { projectName: "Project 2", projectId: 2 },
+    { projectName: "Project 3", projectId: 3 },
+  ],
+  selectedProjectId: 1,
   adsDataTable: [],
   adsDataTableLoading: false,
   adsDataTableError: null,
@@ -15,6 +23,10 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case FETCH_PROJECTS:
+      return { ...state, projects: action.payload };
+    case SELECT_PROJECT:
+      return { ...state, selectedProjectId: action.payload };
     case GET_ALL_ADS:
       return { ...state, adsDataTableLoading: true, adsDataTable: [] };
     case GET_ALL_ADS_SUCCESS:
