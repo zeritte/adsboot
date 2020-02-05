@@ -22,8 +22,8 @@ export default (state = INITIAL_STATE, action) => {
     case FETCH_PROJECTS:
       return {
         ...state,
-        projects: action.payload.projects,
-        selectedProjectId: action.payload.projects[0]["projectId"],
+        projects: action.payload,
+        selectedProjectId: action.payload[0]["projectId"],
       };
     case SELECT_PROJECT:
       return { ...state, selectedProjectId: action.payload };

@@ -17,10 +17,10 @@ export const getProjects = () => (dispatch, getState) => {
       headers: { Authorization: getState().auth.token },
     })
     .then(response => {
-      console.log(response.data);
-      // dispatch({ type: FETCH_PROJECTS, payload: response.data.data });
+      dispatch({ type: FETCH_PROJECTS, payload: response.data.data });
     })
     .catch(error => {
+      // TODO: implement error message
       console.log(error.response);
     });
 };
