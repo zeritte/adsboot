@@ -56,9 +56,9 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loginLoading: false,
-        firstname: action.payload.data.name,
-        lastname: action.payload.data.surname,
-        token: `Bearer ${action.payload.data.jwt}`,
+        firstname: action.payload.name,
+        lastname: action.payload.surname,
+        token: `Bearer ${action.payload.jwt}`,
       };
     case LOG_IN_FAIL:
       return { ...state, loginLoading: false, loginError: action.payload };

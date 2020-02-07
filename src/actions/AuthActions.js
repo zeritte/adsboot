@@ -21,6 +21,7 @@ import {
 } from "./types";
 import urls from "../urls";
 import { getProjects } from "./AdActions";
+import { dataHandler, messageHandler } from "../helpers/responseHandler";
 
 export const setItem = (prop, value) => dispatch => {
   dispatch({ type: SET_ITEM, payload: { prop, value } });
@@ -31,15 +32,12 @@ export const loginUser = (email, password) => dispatch => {
   axios
     .post(urls.session, { email, password })
     .then(response => {
-      dispatch({ type: LOG_IN_SUCCESS, payload: response.data });
+      dataHandler(dispatch, LOG_IN_SUCCESS, response.data);
       dispatch(setShouldVisitTokenScreen(response.data.status.code === 3000));
       dispatch(getProjects());
     })
     .catch(error => {
-      dispatch({
-        type: LOG_IN_FAIL,
-        payload: error.response.data.status.message,
-      });
+      messageHandler(dispatch, LOG_IN_FAIL, error.response);
     });
 };
 
@@ -67,17 +65,11 @@ export const signUp = (fname, lname, email, password) => dispatch => {
   axios
     .post(urls.registration, { name: fname, surname: lname, email, password })
     .then(response => {
-      dispatch({
-        type: SIGN_UP_SUCCESS,
-        payload: response.data.status.message,
-      });
+      messageHandler(dispatch, SIGN_UP_SUCCESS, response);
       dispatch(loginUser(email, password));
     })
     .catch(error => {
-      dispatch({
-        type: SIGN_UP_FAIL,
-        payload: error.response.data.status.message,
-      });
+      messageHandler(dispatch, SIGN_UP_FAIL, error.response);
     });
 };
 
@@ -91,13 +83,10 @@ export const getTokens = () => (dispatch, getState) => {
       headers: { Authorization: getState().auth.token },
     })
     .then(response => {
-      dispatch({ type: GET_TOKENS_SUCCESS, payload: response.data.data });
+      dataHandler(dispatch, GET_TOKENS_SUCCESS, response.data);
     })
     .catch(error => {
-      dispatch({
-        type: GET_TOKENS_FAIL,
-        payload: error.response.data.status.message,
-      });
+      messageHandler(dispatch, GET_TOKENS_FAIL, error.response);
     });
 };
 
@@ -120,17 +109,11 @@ export const updateTokens = (
       { headers: { Authorization: getState().auth.token } },
     )
     .then(response => {
-      dispatch({
-        type: UPDATE_TOKENS_SUCCESS,
-        payload: response.data.status.message,
-      });
+      messageHandler(dispatch, UPDATE_TOKENS_SUCCESS, response);
       dispatch(getTokens());
       dispatch(getProjects());
     })
     .catch(error => {
-      dispatch({
-        type: UPDATE_TOKENS_FAIL,
-        payload: error.response.data.status.message,
-      });
+      messageHandler(dispatch, UPDATE_TOKENS_FAIL, error.response);
     });
 };

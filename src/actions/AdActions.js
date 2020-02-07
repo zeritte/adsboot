@@ -16,6 +16,7 @@ import {
 } from "./types";
 import urls from "../urls";
 import { setItem } from "./AuthActions";
+import { dataHandler, messageHandler } from "../helpers/responseHandler";
 
 export const getProjects = () => (dispatch, getState) => {
   axios
@@ -23,10 +24,11 @@ export const getProjects = () => (dispatch, getState) => {
       headers: { Authorization: getState().auth.token },
     })
     .then(response => {
-      dispatch({ type: FETCH_PROJECTS, payload: response.data.data });
+      dataHandler(dispatch, FETCH_PROJECTS, response.data);
     })
     .catch(error => {
       // TODO: implement error message
+      //messageHandler(dispatch, "FETCH_PROJECTS_FAIL", error.response)
       console.log(error.response);
     });
 };
@@ -37,23 +39,25 @@ export const selectProject = id => dispatch => {
 };
 
 export const getProjectParams = () => (dispatch, getState) => {
-  dispatch({ type: GET_PROJECT_PARAMS });
-  axios
-    .get(urls.projectParams(getState().ad.selectedProjectId), {
-      headers: { Authorization: getState().auth.token },
-    })
-    .then(response => {
-      dispatch({
-        type: GET_PROJECT_PARAMS_SUCCESS,
-        payload: response.data.data,
+  if (getState().ad.selectedProjectId) {
+    dispatch({ type: GET_PROJECT_PARAMS });
+    axios
+      .get(urls.projectParams(getState().ad.selectedProjectId), {
+        headers: { Authorization: getState().auth.token },
+      })
+      .then(response => {
+        dataHandler(dispatch, GET_PROJECT_PARAMS_SUCCESS, response.data);
+      })
+      .catch(error => {
+        messageHandler(dispatch, GET_PROJECT_PARAMS_FAIL, error.response);
       });
-    })
-    .catch(error => {
-      dispatch({
-        type: GET_PROJECT_PARAMS_FAIL,
-        payload: error.response.data.status.message,
-      });
-    });
+  } else {
+    messageHandler(
+      dispatch,
+      GET_PROJECT_PARAMS_FAIL,
+      "Please wait till your projects are fetched",
+    );
+  }
 };
 
 export const updateProjectParams = (stockOutMessage, xpath) => (
@@ -71,16 +75,10 @@ export const updateProjectParams = (stockOutMessage, xpath) => (
       { headers: { Authorization: getState().auth.token } },
     )
     .then(response => {
-      dispatch({
-        type: UPDATE_PROJECT_PARAMS_SUCCESS,
-        payload: response.data.status.message,
-      });
+      messageHandler(dispatch, UPDATE_PROJECT_PARAMS_SUCCESS, response);
     })
     .catch(error => {
-      dispatch({
-        type: UPDATE_PROJECT_PARAMS_FAIL,
-        payload: error.response.data.status.message,
-      });
+      messageHandler(dispatch, UPDATE_PROJECT_PARAMS_FAIL, error.response);
     });
 };
 
@@ -89,13 +87,10 @@ export const getAllAds = () => dispatch => {
   axios
     .get(urls.getAllAds)
     .then(response => {
-      dispatch({ type: GET_ALL_ADS_SUCCESS, payload: response.data });
+      dataHandler(dispatch, GET_ALL_ADS_SUCCESS, response);
     })
     .catch(error => {
-      dispatch({
-        type: GET_ALL_ADS_FAIL,
-        payload: "Could not fetch the data",
-      });
+      messageHandler(dispatch, GET_ALL_ADS_FAIL, "Could not fetch the data");
     });
 };
 
@@ -104,12 +99,9 @@ export const runRules = selectedAdIds => dispatch => {
   axios
     .post(urls.runRules, { selectedAdIds })
     .then(response => {
-      dispatch({ type: RUN_RULES_SUCCESS, payload: response.data });
+      dataHandler(dispatch, RUN_RULES_SUCCESS, response);
     })
     .catch(error => {
-      dispatch({
-        type: RUN_RULES_FAIL,
-        payload: "Could not send the data",
-      });
+      messageHandler(dispatch, RUN_RULES_FAIL, "Could not send the data");
     });
 };
