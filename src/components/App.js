@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
 
 // components
@@ -11,10 +11,7 @@ import Login from "../pages/login";
 import { connect } from "react-redux";
 
 function App(props) {
-  const [isAuthenticated, setIsAuth] = useState(false);
-  useEffect(() => {
-    setIsAuth(!!props.token);
-  }, [props.token]);
+  const isAuthenticated = !!props.token;
 
   return (
     <HashRouter>
