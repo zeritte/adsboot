@@ -13,6 +13,7 @@ import {
   UPDATE_PROJECT_PARAMS,
   UPDATE_PROJECT_PARAMS_SUCCESS,
   UPDATE_PROJECT_PARAMS_FAIL,
+  LOG_OUT,
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -98,6 +99,8 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state };
     case RUN_RULES_SUCCESS:
       return { ...state };
+    case LOG_OUT:
+      return INITIAL_STATE;
     default:
       return state;
   }

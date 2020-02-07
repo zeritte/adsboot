@@ -45,7 +45,7 @@ export default function TokensPage() {
   }, []);
 
   useEffect(() => {
-    if (clientTokens && clientTokens.clientId) {
+    if (!!clientTokens) {
       setClientId(clientTokens.clientId);
       setClientSecret(clientTokens.clientSecret);
       setDeveloperToken(clientTokens.developerToken);

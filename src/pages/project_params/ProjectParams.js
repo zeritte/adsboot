@@ -17,7 +17,7 @@ import Widget from "../../components/Widget/Widget";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProjectParams, getProjectParams } from "../../actions";
 
-export default function TokensPage() {
+export default function ProjectParamsPage() {
   const [message, setMessage] = useState("");
   const [xpath, setXpath] = useState("");
   const projectParams = useSelector(state => state.ad.projectParams);
@@ -38,7 +38,7 @@ export default function TokensPage() {
   }, []);
 
   useEffect(() => {
-    if (projectParams && projectParams.message) {
+    if (!!projectParams) {
       setMessage(projectParams.message);
       setXpath(projectParams.xpath);
     } else {

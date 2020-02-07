@@ -310,7 +310,7 @@ function Header(props) {
             <Typography
               className={classes.profileMenuLink}
               color="primary"
-              onClick={() => props.logoutUser(props.history)}
+              onClick={() => props.logoutUser()}
             >
               Sign Out
             </Typography>
