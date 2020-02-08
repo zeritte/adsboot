@@ -1,4 +1,4 @@
-# React Material Admin — Material-UI Dashboard Template
+<!-- # React Material Admin — Material-UI Dashboard Template
 
 Built with [React](https://facebook.github.io/react/), [Material-UI](https://material-ui.com), [React Router](https://reacttraining.com/react-router/).
 **No jQuery and Bootstrap!**
@@ -99,4 +99,4 @@ Looking for premium themes and templates? Check out more [admin dashboard templa
 
 ## License
 
-[MIT](https://github.com/flatlogic/react-material-dashboard/blob/master/LICENSE.txt).
+[MIT](https://github.com/flatlogic/react-material-dashboard/blob/master/LICENSE.txt). -->
