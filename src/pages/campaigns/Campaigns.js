@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Typography, Button } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import MUIDataTable from "mui-datatables";
+import MUIDataTable from "../../helpers/datatable";
 
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
