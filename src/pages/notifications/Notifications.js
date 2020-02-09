@@ -340,7 +340,7 @@ export default function NotificationsPage(props) {
       case "info":
         componentProps = {
           type: "feedback",
-          message: "New user feedback received",
+          message: "Rules were run",
           variant: "contained",
           color: "primary",
         };
@@ -358,7 +358,7 @@ export default function NotificationsPage(props) {
       default:
         componentProps = {
           type: "shipped",
-          message: "The item was shipped",
+          message: "Running rules are ended",
           variant: "contained",
           color: "success",
         };

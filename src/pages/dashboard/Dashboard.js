@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   LinearProgress,
@@ -38,6 +38,9 @@ import BigStat from "./components/BigStat/BigStat";
 // eslint-disable-next-line
 import { useSelector, useDispatch } from "react-redux";
 
+import { w3cwebsocket as W3CWebSocket } from "websocket";
+const client = new W3CWebSocket("wss://adsbotapi.herokuapp.com/publish-report");
+
 const mainChartData = getMainChartData();
 const PieChartData = [
   { name: "Group A", value: 400, color: "primary" },
@@ -54,6 +57,16 @@ export default function Dashboard(props) {
   var classes = useStyles();
   var theme = useTheme();
 
+  useEffect(() => {
+    client.onopen = () => {
+      console.log("WebSocket Client Connected");
+    };
+    client.onmessage = message => {
+      console.log(message);
+    };
+    client.onerror = error => console.log(error);
+  }, []);
+
   // local
   var [mainChartState, setMainChartState] = useState("monthly");
 
@@ -61,8 +74,8 @@ export default function Dashboard(props) {
 
   return (
     <>
-      <PageTitle title="Dashboard" button="Latest Reports" />
-      <Grid container spacing={4}>
+      <PageTitle title="Dashboard" />
+      {/* <Grid container spacing={4}>
         <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget
             title="Visits Today"
@@ -418,7 +431,7 @@ export default function Dashboard(props) {
             <Table data={mock.table} />
           </Widget>
         </Grid>
-      </Grid>
+      </Grid> */}
     </>
   );
 }
