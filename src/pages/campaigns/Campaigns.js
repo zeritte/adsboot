@@ -4,8 +4,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import MUIDataTable from "mui-datatables";
 
 // components
-import PageTitle from "../../components/PageTitle";
-import Widget from "../../components/Widget";
+import PageTitle from "../../components/PageTitle/PageTitle";
+import Widget from "../../components/Widget/Widget";
 import Report from "../dashboard/components/Report/Report";
 
 // data
@@ -14,7 +14,7 @@ import mock from "../dashboard/mock";
 import { connect } from "react-redux";
 import { getAllAds, runRules } from "../../actions";
 
-function Tables(props) {
+function Campaigns(props) {
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectedAdIds, setSelectedAdIds] = useState([]);
 
@@ -121,7 +121,7 @@ function Tables(props) {
 
   return (
     <>
-      <PageTitle title="Tables" />
+      <PageTitle title="Campaigns" />
       <Grid container spacing={4}>
         <Grid container justify="center">
           {props.adsDataTableLoading ? <CircularProgress /> : null}
@@ -172,4 +172,4 @@ const mapStateToProps = state => {
   return { adsDataTable, adsDataTableLoading, adsDataTableError };
 };
 
-export default connect(mapStateToProps, { getAllAds, runRules })(Tables);
+export default connect(mapStateToProps, { getAllAds, runRules })(Campaigns);
