@@ -79,7 +79,6 @@ export default function Table(props) {
       setSelectedRows([]);
       return false;
     },
-    // TODO FILTER NOT WORKS RELATED TO PACKAGE https://github.com/gregnb/mui-datatables/pull/1058
   };
 
   const _runRules = () => dispatch(runRules(selectedAdIds));
