@@ -4,6 +4,12 @@ import {
   GET_ALL_ADS,
   GET_ALL_ADS_FAIL,
   GET_ALL_ADS_SUCCESS,
+  GET_ADGROUPS,
+  GET_ADGROUPS_FAIL,
+  GET_ADGROUPS_SUCCESS,
+  GET_CAMPAIGNS,
+  GET_CAMPAIGNS_FAIL,
+  GET_CAMPAIGNS_SUCCESS,
   RUN_RULES,
   RUN_RULES_FAIL,
   RUN_RULES_SUCCESS,
@@ -39,25 +45,25 @@ export const selectProject = id => dispatch => {
 };
 
 export const getProjectParams = () => (dispatch, getState) => {
-  if (getState().ad.selectedProjectId) {
-    dispatch({ type: GET_PROJECT_PARAMS });
-    axios
-      .get(urls.projectParams(getState().ad.selectedProjectId), {
-        headers: { Authorization: getState().auth.token },
-      })
-      .then(response => {
-        dataHandler(dispatch, GET_PROJECT_PARAMS_SUCCESS, response.data);
-      })
-      .catch(error => {
-        messageHandler(dispatch, GET_PROJECT_PARAMS_FAIL, error.response);
-      });
-  } else {
+  if (!getState().ad.selectedProjectId) {
     messageHandler(
       dispatch,
       GET_PROJECT_PARAMS_FAIL,
       "Please wait till your projects are fetched",
     );
+    return;
   }
+  dispatch({ type: GET_PROJECT_PARAMS });
+  axios
+    .get(urls.projectParams(getState().ad.selectedProjectId), {
+      headers: { Authorization: getState().auth.token },
+    })
+    .then(response => {
+      dataHandler(dispatch, GET_PROJECT_PARAMS_SUCCESS, response.data);
+    })
+    .catch(error => {
+      messageHandler(dispatch, GET_PROJECT_PARAMS_FAIL, error.response);
+    });
 };
 
 export const updateProjectParams = (stockOutMessage, xpath) => (
@@ -82,26 +88,57 @@ export const updateProjectParams = (stockOutMessage, xpath) => (
     });
 };
 
-export const getAllAds = () => dispatch => {
+export const getAllAds = () => (dispatch, getState) => {
   dispatch({ type: GET_ALL_ADS });
   axios
-    .get(urls.getAllAds)
+    .get(urls.allAds(getState().ad.selectedProjectId), {
+      headers: { Authorization: getState().auth.token },
+    })
     .then(response => {
-      dataHandler(dispatch, GET_ALL_ADS_SUCCESS, response);
+      dataHandler(dispatch, GET_ALL_ADS_SUCCESS, response.data);
     })
     .catch(error => {
       messageHandler(dispatch, GET_ALL_ADS_FAIL, "Could not fetch the data");
     });
 };
 
-export const runRules = selectedAdIds => dispatch => {
-  dispatch({ type: RUN_RULES });
+export const getAdgroups = () => (dispatch, getState) => {
+  dispatch({ type: GET_ADGROUPS });
   axios
-    .post(urls.runRules, { selectedAdIds })
+    .get(urls.adgroups(getState().ad.selectedProjectId), {
+      headers: { Authorization: getState().auth.token },
+    })
     .then(response => {
-      dataHandler(dispatch, RUN_RULES_SUCCESS, response);
+      dataHandler(dispatch, GET_ADGROUPS_SUCCESS, response.data);
     })
     .catch(error => {
-      messageHandler(dispatch, RUN_RULES_FAIL, "Could not send the data");
+      messageHandler(dispatch, GET_ADGROUPS_FAIL, "Could not fetch the data");
     });
+};
+
+export const getCampaigns = () => (dispatch, getState) => {
+  dispatch({ type: GET_CAMPAIGNS });
+  axios
+    .get(urls.campaigns(getState().ad.selectedProjectId), {
+      headers: { Authorization: getState().auth.token },
+    })
+    .then(response => {
+      dataHandler(dispatch, GET_CAMPAIGNS_SUCCESS, response.data);
+    })
+    .catch(error => {
+      messageHandler(dispatch, GET_CAMPAIGNS_FAIL, "Could not fetch the data");
+    });
+};
+
+export const runRules = selectedAdIds => dispatch => {
+  console.log("runrules");
+  // dispatch({ type: RUN_RULES });
+  // axios
+  //   .post(urls.runRules, { selectedAdIds })
+  //   .then(response => {
+  //     dataHandler(dispatch, RUN_RULES_SUCCESS, response);
+  //   })
+  //   .catch(error => {
+  //     messageHandler(dispatch, RUN_RULES_FAIL, "Could not send the data");
+  //   });
 };

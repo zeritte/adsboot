@@ -14,18 +14,30 @@ import {
   UPDATE_PROJECT_PARAMS_SUCCESS,
   UPDATE_PROJECT_PARAMS_FAIL,
   LOG_OUT,
+  GET_ADGROUPS,
+  GET_ADGROUPS_SUCCESS,
+  GET_ADGROUPS_FAIL,
+  GET_CAMPAIGNS,
+  GET_CAMPAIGNS_FAIL,
+  GET_CAMPAIGNS_SUCCESS,
 } from "../actions/types";
 
 const INITIAL_STATE = {
   projects: [],
   selectedProjectId: null,
-  adsDataTable: [],
-  adsDataTableLoading: false,
-  adsDataTableError: null,
   projectParams: null,
   projectParamsLoading: false,
   projectParamsError: null,
   projectParamsMessage: null,
+  allAds: [],
+  allAdsLoading: false,
+  allAdsError: null,
+  adgroups: [],
+  adgroupsLoading: false,
+  adgroupsError: null,
+  campaigns: [],
+  campaignsLoading: false,
+  campaignsError: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -80,18 +92,42 @@ export default (state = INITIAL_STATE, action) => {
         projectParamsLoading: false,
       };
     case GET_ALL_ADS:
-      return { ...state, adsDataTableLoading: true, adsDataTable: [] };
+      return { ...state, allAdsLoading: true, allAds: [] };
     case GET_ALL_ADS_SUCCESS:
       return {
         ...state,
-        adsDataTable: [], //action.payload
-        adsDataTableLoading: false,
+        allAds: action.payload,
+        allAdsLoading: false,
       };
     case GET_ALL_ADS_FAIL:
       return {
         ...state,
-        adsDataTableLoading: false,
-        adsDataTableError: "Could not fetch the data",
+        allAdsError: action.payload,
+        allAdsLoading: false,
+      };
+    case GET_ADGROUPS:
+      return { ...state, adgroupsLoading: true, adgroups: [] };
+    case GET_ADGROUPS_SUCCESS:
+      return {
+        ...state,
+        adgroups: action.payload,
+        adgroupsLoading: false,
+      };
+    case GET_ADGROUPS_FAIL:
+      return {
+        ...state,
+        adgroupsError: action.payload,
+        adgroupsLoading: false,
+      };
+    case GET_CAMPAIGNS:
+      return { ...state, campaignsLoading: true, campaigns: [] };
+    case GET_CAMPAIGNS_SUCCESS:
+      return { ...state, campaigns: action.payload, campaignsLoading: false };
+    case GET_CAMPAIGNS_FAIL:
+      return {
+        ...state,
+        campaignsError: action.payload,
+        campaignsLoading: false,
       };
     case RUN_RULES:
       return { ...state };

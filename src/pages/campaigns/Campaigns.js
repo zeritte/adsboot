@@ -11,22 +11,35 @@ import Report from "../dashboard/components/Report/Report";
 // data
 import mock from "../dashboard/mock";
 
-import { connect } from "react-redux";
-import { getAllAds, runRules } from "../../actions";
+import { useSelector, useDispatch } from "react-redux";
+import { getCampaigns, runRules } from "../../actions";
 
-function Campaigns(props) {
+export default function Table(props) {
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectedAdIds, setSelectedAdIds] = useState([]);
+  const selectedProjectId = useSelector(state => state.ad.selectedProjectId);
+  const campaigns = useSelector(state => state.ad.campaigns);
+  const campaignsLoading = useSelector(state => state.ad.campaignsLoading);
+  const campaignsError = useSelector(state => state.ad.campaignsError);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    props.getAllAds();
+    dispatch(getCampaigns());
     // eslint-disable-next-line
-  }, []);
+  }, [selectedProjectId]);
 
   const columns = [
     {
-      label: "Ad ID",
-      name: "ad_id",
+      label: "Campaign ID",
+      name: "id",
+      options: {
+        filter: false,
+        sort: true,
+      },
+    },
+    {
+      label: "Name",
+      name: "name",
       options: {
         filter: false,
         sort: true,
@@ -41,58 +54,26 @@ function Campaigns(props) {
       },
     },
     {
-      label: "Headline Part 1",
-      name: "headlinePart1",
-      options: {
-        filter: false,
-        sort: true,
-      },
-    },
-    {
-      label: "Headline Part 2",
-      name: "headlinePart2",
-      options: {
-        filter: false,
-        sort: true,
-      },
-    },
-    {
-      label: "Description",
-      name: "description",
-      options: {
-        filter: false,
-        sort: true,
-      },
-    },
-    {
-      label: "Final Url",
-      name: "finalUrl",
-      options: {
-        filter: false,
-        sort: false,
-      },
-    },
-    {
-      label: "Client",
-      name: "client",
+      label: "Start Date",
+      name: "startDate",
       options: {
         filter: true,
         sort: true,
       },
     },
     {
-      label: "Campaign",
-      name: "campaign",
+      label: "End Date",
+      name: "endDate",
       options: {
         filter: true,
         sort: true,
       },
     },
     {
-      label: "AdGroup",
-      name: "adGroup",
+      label: "Budget",
+      name: "budget",
       options: {
-        filter: true,
+        filter: false,
         sort: true,
       },
     },
@@ -105,7 +86,7 @@ function Campaigns(props) {
       setSelectedRows(allRowsSelected.map(row => row.dataIndex));
       let dataIndex = [];
       allRowsSelected.forEach(element => dataIndex.push(element.dataIndex));
-      const rowsSelected = props.adsDataTable.filter((value, index, array) =>
+      const rowsSelected = campaigns.filter((value, index, array) =>
         dataIndex.includes(index),
       );
       setSelectedAdIds(rowsSelected.map(obj => obj.ad_id));
@@ -117,20 +98,22 @@ function Campaigns(props) {
     // TODO FILTER NOT WORKS RELATED TO PACKAGE https://github.com/gregnb/mui-datatables/pull/1058
   };
 
-  const runRules = () => props.runRules(selectedAdIds);
+  const _runRules = () => dispatch(runRules(selectedAdIds));
+
+  const _isRunRulesDisabled = true || selectedAdIds.length === 0;
 
   return (
     <>
       <PageTitle title="Campaigns" />
       <Grid container spacing={4}>
         <Grid container justify="center">
-          {props.adsDataTableLoading ? <CircularProgress /> : null}
-          <Typography>{props.adsDataTableError}</Typography>
+          {campaignsLoading && <CircularProgress />}
+          <Typography>{campaignsError}</Typography>
         </Grid>
         <Grid container justify="flex-end" style={{ marginRight: 20 }}>
           <Button
-            disabled={selectedAdIds.length === 0}
-            onClick={runRules}
+            disabled={_isRunRulesDisabled}
+            onClick={_runRules}
             variant="contained"
             color="primary"
             size="large"
@@ -141,15 +124,15 @@ function Campaigns(props) {
         <Grid item xs={12}>
           <MUIDataTable
             title="Ad List"
-            data={props.adsDataTable}
+            data={campaigns}
             columns={columns}
             options={options}
           />
         </Grid>
         <Grid container justify="flex-end" style={{ marginRight: 20 }}>
           <Button
-            disabled={selectedAdIds.length === 0}
-            onClick={runRules}
+            disabled={_isRunRulesDisabled}
+            onClick={_runRules}
             variant="contained"
             color="primary"
             size="large"
@@ -166,10 +149,3 @@ function Campaigns(props) {
     </>
   );
 }
-
-const mapStateToProps = state => {
-  const { adsDataTable, adsDataTableLoading, adsDataTableError } = state.ad;
-  return { adsDataTable, adsDataTableLoading, adsDataTableError };
-};
-
-export default connect(mapStateToProps, { getAllAds, runRules })(Campaigns);

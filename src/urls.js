@@ -5,8 +5,11 @@ const registration = `${base_url}user`;
 const password = `${base_url}passwords`;
 const clientTokens = `${base_url}client-token`;
 const projects = `${base_url}projects`;
-const projectParams = projectId => `${base_url}projects/${projectId}/rule-parameters`;
-const getAllAds = `${base_url}getAds`;
+const projectParams = projectId =>
+  `${base_url}projects/${projectId}/rule-parameters`;
+const allAds = projectId => `${base_url}projects/${projectId}/ads`;
+const adgroups = projectId => `${base_url}projects/${projectId}/adgroups`;
+const campaigns = projectId => `${base_url}projects/${projectId}/campaigns`;
 const runRules = `${base_url}run`;
 
 export default {
@@ -17,6 +20,8 @@ export default {
   clientTokens,
   projects,
   projectParams,
-  getAllAds,
+  allAds,
+  adgroups,
+  campaigns,
   runRules,
 };

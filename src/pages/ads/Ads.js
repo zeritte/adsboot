@@ -11,22 +11,27 @@ import Report from "../dashboard/components/Report/Report";
 // data
 import mock from "../dashboard/mock";
 
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getAllAds, runRules } from "../../actions";
 
-function Ads(props) {
+export default function Table(props) {
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectedAdIds, setSelectedAdIds] = useState([]);
+  const selectedProjectId = useSelector(state => state.ad.selectedProjectId);
+  const allAds = useSelector(state => state.ad.allAds);
+  const allAdsLoading = useSelector(state => state.ad.allAdsLoading);
+  const allAdsError = useSelector(state => state.ad.allAdsError);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    props.getAllAds();
+    dispatch(getAllAds());
     // eslint-disable-next-line
-  }, []);
+  }, [selectedProjectId]);
 
   const columns = [
     {
       label: "Ad ID",
-      name: "ad_id",
+      name: "id",
       options: {
         filter: false,
         sort: true,
@@ -66,31 +71,23 @@ function Ads(props) {
     },
     {
       label: "Final Url",
-      name: "finalUrl",
+      name: "url",
       options: {
         filter: false,
         sort: false,
       },
     },
     {
-      label: "Client",
-      name: "client",
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
-    {
       label: "Campaign",
-      name: "campaign",
+      name: "campaignName",
       options: {
         filter: true,
         sort: true,
       },
     },
     {
-      label: "AdGroup",
-      name: "adGroup",
+      label: "Ad Group",
+      name: "adGroupName",
       options: {
         filter: true,
         sort: true,
@@ -105,7 +102,7 @@ function Ads(props) {
       setSelectedRows(allRowsSelected.map(row => row.dataIndex));
       let dataIndex = [];
       allRowsSelected.forEach(element => dataIndex.push(element.dataIndex));
-      const rowsSelected = props.adsDataTable.filter((value, index, array) =>
+      const rowsSelected = allAds.filter((value, index, array) =>
         dataIndex.includes(index),
       );
       setSelectedAdIds(rowsSelected.map(obj => obj.ad_id));
@@ -117,20 +114,22 @@ function Ads(props) {
     // TODO FILTER NOT WORKS RELATED TO PACKAGE https://github.com/gregnb/mui-datatables/pull/1058
   };
 
-  const runRules = () => props.runRules(selectedAdIds);
+  const _runRules = () => dispatch(runRules(selectedAdIds));
+
+  const _isRunRulesDisabled = true || selectedAdIds.length === 0;
 
   return (
     <>
       <PageTitle title="Ads" />
       <Grid container spacing={4}>
         <Grid container justify="center">
-          {props.adsDataTableLoading ? <CircularProgress /> : null}
-          <Typography>{props.adsDataTableError}</Typography>
+          {allAdsLoading && <CircularProgress />}
+          <Typography>{allAdsError}</Typography>
         </Grid>
         <Grid container justify="flex-end" style={{ marginRight: 20 }}>
           <Button
-            disabled={selectedAdIds.length === 0}
-            onClick={runRules}
+            disabled={_isRunRulesDisabled}
+            onClick={_runRules}
             variant="contained"
             color="primary"
             size="large"
@@ -141,15 +140,15 @@ function Ads(props) {
         <Grid item xs={12}>
           <MUIDataTable
             title="Ad List"
-            data={props.adsDataTable}
+            data={allAds}
             columns={columns}
             options={options}
           />
         </Grid>
         <Grid container justify="flex-end" style={{ marginRight: 20 }}>
           <Button
-            disabled={selectedAdIds.length === 0}
-            onClick={runRules}
+            disabled={_isRunRulesDisabled}
+            onClick={_runRules}
             variant="contained"
             color="primary"
             size="large"
@@ -166,10 +165,3 @@ function Ads(props) {
     </>
   );
 }
-
-const mapStateToProps = state => {
-  const { adsDataTable, adsDataTableLoading, adsDataTableError } = state.ad;
-  return { adsDataTable, adsDataTableLoading, adsDataTableError };
-};
-
-export default connect(mapStateToProps, { getAllAds, runRules })(Ads);
