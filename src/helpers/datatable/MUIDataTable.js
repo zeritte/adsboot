@@ -412,11 +412,6 @@ class MUIDataTable extends React.Component {
         'The "scroll" responsive option has been deprecated. It is being replaced by "scrollMaxHeight"',
       );
     }
-    if (this.options.fixedHeader) {
-      console.error(
-        "fixedHeader has been deprecated in favor of fixedHeaderOptions: { xAxis: boolean, yAxis: boolean }. Once removed, the new options will be set by default to render like the old fixedHeader. However, if you are setting the fixedHeader value manually, it will no longer work in the next major version.",
-      );
-    }
 
     this.props.columns.map(c => {
       if (c.options && c.options.customFilterListRender) {
