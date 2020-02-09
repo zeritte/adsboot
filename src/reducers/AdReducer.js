@@ -92,7 +92,7 @@ export default (state = INITIAL_STATE, action) => {
         projectParamsLoading: false,
       };
     case GET_ALL_ADS:
-      return { ...state, allAdsLoading: true, allAds: [] };
+      return { ...state, allAdsLoading: true, allAds: [], allAdsError: null };
     case GET_ALL_ADS_SUCCESS:
       return {
         ...state,
@@ -106,7 +106,12 @@ export default (state = INITIAL_STATE, action) => {
         allAdsLoading: false,
       };
     case GET_ADGROUPS:
-      return { ...state, adgroupsLoading: true, adgroups: [] };
+      return {
+        ...state,
+        adgroupsLoading: true,
+        adgroups: [],
+        adgroupsError: null,
+      };
     case GET_ADGROUPS_SUCCESS:
       return {
         ...state,
@@ -120,7 +125,12 @@ export default (state = INITIAL_STATE, action) => {
         adgroupsLoading: false,
       };
     case GET_CAMPAIGNS:
-      return { ...state, campaignsLoading: true, campaigns: [] };
+      return {
+        ...state,
+        campaignsLoading: true,
+        campaigns: [],
+        campaignsError: null,
+      };
     case GET_CAMPAIGNS_SUCCESS:
       return { ...state, campaigns: action.payload, campaignsLoading: false };
     case GET_CAMPAIGNS_FAIL:

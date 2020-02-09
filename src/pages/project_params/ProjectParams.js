@@ -20,6 +20,7 @@ import { updateProjectParams, getProjectParams } from "../../actions";
 export default function ProjectParamsPage() {
   const [message, setMessage] = useState("");
   const [xpath, setXpath] = useState("");
+  const selectedProjectId = useSelector(state => state.ad.selectedProjectId);
   const projectParams = useSelector(state => state.ad.projectParams);
   const projectParamsLoading = useSelector(
     state => state.ad.projectParamsLoading,
@@ -35,7 +36,7 @@ export default function ProjectParamsPage() {
   useEffect(() => {
     dispatch(getProjectParams());
     // eslint-disable-next-line
-  }, []);
+  }, [selectedProjectId]);
 
   useEffect(() => {
     if (!!projectParams) {

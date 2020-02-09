@@ -92,7 +92,7 @@ export default function Table(props) {
       <Grid container spacing={4}>
         <Grid container justify="center">
           {adgroupsLoading && <CircularProgress />}
-          <Typography>{adgroupsError}</Typography>
+          <Typography color="secondary">{adgroupsError}</Typography>
         </Grid>
         <Grid container justify="flex-end" style={{ marginRight: 20 }}>
           <Button
@@ -107,7 +107,7 @@ export default function Table(props) {
         </Grid>
         <Grid item xs={12}>
           <MUIDataTable
-            title="Ad List"
+            title="Ad Groups"
             data={adgroups}
             columns={columns}
             options={options}
