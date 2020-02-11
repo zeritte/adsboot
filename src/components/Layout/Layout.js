@@ -48,7 +48,7 @@ function Layout(props) {
             <Route path="/app/project_params" component={ProjectParams} />
             <Route path="/app/campaigns" component={Campaigns} />
             <Route path="/app/adgroups" component={AdGroups} />
-            <Route path="/app/ads" component={Notifications} />
+            <Route path="/app/ads" component={Ads} />
           </Switch>
         </div>
       </>

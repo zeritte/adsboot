@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Typography, Button } from "@material-ui/core";
+import { Grid, Typography, Button, Link } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import MUIDataTable from "../../helpers/datatable";
 
@@ -75,6 +75,9 @@ export default function Table(props) {
       options: {
         filter: false,
         sort: false,
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return <Link href={value}>{value}</Link>;
+        },
       },
     },
     {

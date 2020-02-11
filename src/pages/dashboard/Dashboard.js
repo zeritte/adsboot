@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import {
   Grid,
   LinearProgress,
   Select,
   OutlinedInput,
   MenuItem,
+  Button,
 } from "@material-ui/core";
 import { useTheme } from "@material-ui/styles";
 import {
@@ -38,8 +39,7 @@ import BigStat from "./components/BigStat/BigStat";
 // eslint-disable-next-line
 import { useSelector, useDispatch } from "react-redux";
 
-import { w3cwebsocket as W3CWebSocket } from "websocket";
-const client = new W3CWebSocket("wss://adsbotapi.herokuapp.com/publish-report");
+import SockJsClient from "react-stomp";
 
 const mainChartData = getMainChartData();
 const PieChartData = [
@@ -57,15 +57,9 @@ export default function Dashboard(props) {
   var classes = useStyles();
   var theme = useTheme();
 
-  useEffect(() => {
-    client.onopen = () => {
-      console.log("WebSocket Client Connected");
-    };
-    client.onmessage = message => {
-      console.log(message);
-    };
-    client.onerror = error => console.log(error);
-  }, []);
+  const client = useRef();
+
+  const onsend = () => client.current.sendMessage("/publish-report", "GIDEN MESAJ!!! socket tamamdır burak");
 
   // local
   var [mainChartState, setMainChartState] = useState("monthly");
@@ -75,6 +69,16 @@ export default function Dashboard(props) {
   return (
     <>
       <PageTitle title="Dashboard" />
+      <SockJsClient
+        url="https://adsbotapi.herokuapp.com/publish-report"
+        topics={["/publish-report"]}
+        debug
+        onMessage={msg => console.log("GELENMESAJ!!! ",msg)}
+        ref={client}
+      />
+      <Button onClick={onsend}>
+        <Typography>hahaha</Typography>
+      </Button>
       {/* <Grid container spacing={4}>
         <Grid item lg={3} md={4} sm={6} xs={12}>
           <Widget
