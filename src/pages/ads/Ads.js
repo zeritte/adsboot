@@ -25,6 +25,8 @@ export default function Table(props) {
 
   useEffect(() => {
     dispatch(getAllAds());
+    setSelectedRows([]);
+    setSelectedItems([]);
     // eslint-disable-next-line
   }, [selectedProjectId]);
 
@@ -108,7 +110,7 @@ export default function Table(props) {
       const rowsSelected = allAds.filter((value, index, array) =>
         dataIndex.includes(index),
       );
-      setSelectedItems(rowsSelected.map(obj => obj.ad_id));
+      setSelectedItems(rowsSelected.map(obj => obj.id));
     },
     onRowsDelete: () => {
       setSelectedRows([]);

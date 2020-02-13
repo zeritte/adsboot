@@ -139,15 +139,16 @@ export const getCampaigns = () => (dispatch, getState) => {
     });
 };
 
-export const runRules = selectedAdIds => dispatch => {
-  console.log("runrules");
-  // dispatch({ type: RUN_RULES });
-  // axios
-  //   .post(urls.runRules, { selectedAdIds })
-  //   .then(response => {
-  //     dataHandler(dispatch, RUN_RULES_SUCCESS, response);
-  //   })
-  //   .catch(error => {
-  //     messageHandler(dispatch, RUN_RULES_FAIL, error.response);
-  //   });
+export const runRules = selectedAdIds => (dispatch, getState) => {
+  dispatch({ type: RUN_RULES });
+  axios
+    .post(urls.runRules(getState().ad.selectedProjectId), selectedAdIds, {
+      headers: { Authorization: getState().auth.token },
+    })
+    .then(response => {
+      messageHandler(dispatch, RUN_RULES_SUCCESS, response.data);
+    })
+    .catch(error => {
+      messageHandler(dispatch, RUN_RULES_FAIL, error.response);
+    });
 };

@@ -25,6 +25,8 @@ export default function Table(props) {
 
   useEffect(() => {
     dispatch(getAdgroups());
+    setSelectedRows([]);
+    setSelectedItems([]);
     // eslint-disable-next-line
   }, [selectedProjectId]);
 
@@ -73,7 +75,7 @@ export default function Table(props) {
       const rowsSelected = adgroups.filter((value, index, array) =>
         dataIndex.includes(index),
       );
-      setSelectedItems(rowsSelected.map(obj => obj.ad_id));
+      setSelectedItems(rowsSelected.map(obj => obj.id));
     },
     onRowsDelete: () => {
       setSelectedRows([]);
@@ -122,11 +124,6 @@ export default function Table(props) {
           >
             RUN RULES
           </Button>
-        </Grid>
-        <Grid item xs={12}>
-          <Widget title="Report Table" upperTitle noBodyPadding>
-            <Report data={mock.report} />
-          </Widget>
         </Grid>
       </Grid>
     </>

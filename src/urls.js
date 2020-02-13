@@ -10,7 +10,7 @@ const projectParams = projectId =>
 const allAds = projectId => `${base_url}projects/${projectId}/ads`;
 const adgroups = projectId => `${base_url}projects/${projectId}/adgroups`;
 const campaigns = projectId => `${base_url}projects/${projectId}/campaigns`;
-const runRules = `${base_url}run`;
+const runRules = projectId => `${base_url}projects/${projectId}/reports`;
 
 export default {
   base_url,
