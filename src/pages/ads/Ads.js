@@ -16,7 +16,7 @@ import { getAllAds, runRules } from "../../actions";
 
 export default function Table(props) {
   const [selectedRows, setSelectedRows] = useState([]);
-  const [selectedAdIds, setSelectedAdIds] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([]);
   const selectedProjectId = useSelector(state => state.ad.selectedProjectId);
   const allAds = useSelector(state => state.ad.allAds);
   const allAdsLoading = useSelector(state => state.ad.allAdsLoading);
@@ -103,12 +103,12 @@ export default function Table(props) {
     rowsSelected: selectedRows,
     onRowsSelect: (currentRowsSelected, allRowsSelected) => {
       setSelectedRows(allRowsSelected.map(row => row.dataIndex));
-      let dataIndex = [];
+      const dataIndex = [];
       allRowsSelected.forEach(element => dataIndex.push(element.dataIndex));
       const rowsSelected = allAds.filter((value, index, array) =>
         dataIndex.includes(index),
       );
-      setSelectedAdIds(rowsSelected.map(obj => obj.ad_id));
+      setSelectedItems(rowsSelected.map(obj => obj.ad_id));
     },
     onRowsDelete: () => {
       setSelectedRows([]);
@@ -117,9 +117,9 @@ export default function Table(props) {
     // TODO FILTER NOT WORKS RELATED TO PACKAGE https://github.com/gregnb/mui-datatables/pull/1086
   };
 
-  const _runRules = () => dispatch(runRules(selectedAdIds));
+  const _runRules = () => dispatch(runRules(selectedItems));
 
-  const _isRunRulesDisabled = true || selectedAdIds.length === 0;
+  const _isRunRulesDisabled = selectedItems.length === 0;
 
   return (
     <>

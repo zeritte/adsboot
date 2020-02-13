@@ -16,7 +16,7 @@ import { getAdgroups, runRules } from "../../actions";
 
 export default function Table(props) {
   const [selectedRows, setSelectedRows] = useState([]);
-  const [selectedAdIds, setSelectedAdIds] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([]);
   const selectedProjectId = useSelector(state => state.ad.selectedProjectId);
   const adgroups = useSelector(state => state.ad.adgroups);
   const adgroupsLoading = useSelector(state => state.ad.adgroupsLoading);
@@ -73,7 +73,7 @@ export default function Table(props) {
       const rowsSelected = adgroups.filter((value, index, array) =>
         dataIndex.includes(index),
       );
-      setSelectedAdIds(rowsSelected.map(obj => obj.ad_id));
+      setSelectedItems(rowsSelected.map(obj => obj.ad_id));
     },
     onRowsDelete: () => {
       setSelectedRows([]);
@@ -81,9 +81,9 @@ export default function Table(props) {
     },
   };
 
-  const _runRules = () => dispatch(runRules(selectedAdIds));
+  const _runRules = () => dispatch(runRules(selectedItems));
 
-  const _isRunRulesDisabled = true || selectedAdIds.length === 0;
+  const _isRunRulesDisabled = true || selectedItems.length === 0;
 
   return (
     <>
