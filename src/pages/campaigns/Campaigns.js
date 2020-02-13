@@ -84,7 +84,7 @@ export default function Table(props) {
     rowsSelected: selectedRows,
     onRowsSelect: (currentRowsSelected, allRowsSelected) => {
       setSelectedRows(allRowsSelected.map(row => row.dataIndex));
-      let dataIndex = [];
+      const dataIndex = [];
       allRowsSelected.forEach(element => dataIndex.push(element.dataIndex));
       const rowsSelected = campaigns.filter((value, index, array) =>
         dataIndex.includes(index),
