@@ -16,6 +16,7 @@ import ProjectParams from "../../pages/project_params";
 import Campaigns from "../../pages/campaigns";
 import AdGroups from "../../pages/adgroups";
 import Ads from "../../pages/ads";
+import Report from "../../pages/report"
 // import Typography from "../../pages/typography";
 import Notifications from "../../pages/notifications";
 // import Maps from "../../pages/maps";
@@ -49,6 +50,7 @@ function Layout(props) {
             <Route path="/app/campaigns" component={Campaigns} />
             <Route path="/app/adgroups" component={AdGroups} />
             <Route path="/app/ads" component={Ads} />
+            <Route path="/app/report" component={Report} />
           </Switch>
         </div>
       </>

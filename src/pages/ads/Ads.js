@@ -5,11 +5,6 @@ import MUIDataTable from "../../helpers/datatable";
 
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
-import Widget from "../../components/Widget/Widget";
-import Report from "../dashboard/components/Report/Report";
-
-// data
-import mock from "../dashboard/mock";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getAllAds, runRules } from "../../actions";
@@ -160,11 +155,6 @@ export default function Table(props) {
           >
             RUN RULES
           </Button>
-        </Grid>
-        <Grid item xs={12}>
-          <Widget title="Report Table" upperTitle noBodyPadding>
-            <Report data={mock.report} />
-          </Widget>
         </Grid>
       </Grid>
     </>

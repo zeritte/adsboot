@@ -5,11 +5,6 @@ import MUIDataTable from "../../helpers/datatable";
 
 // components
 import PageTitle from "../../components/PageTitle/PageTitle";
-import Widget from "../../components/Widget/Widget";
-import Report from "../dashboard/components/Report/Report";
-
-// data
-import mock from "../dashboard/mock";
 
 import { useSelector, useDispatch } from "react-redux";
 import { getCampaigns, runRules } from "../../actions";
