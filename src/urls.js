@@ -11,6 +11,10 @@ const allAds = projectId => `${base_url}projects/${projectId}/ads`;
 const adgroups = projectId => `${base_url}projects/${projectId}/adgroups`;
 const campaigns = projectId => `${base_url}projects/${projectId}/campaigns`;
 const runRules = projectId => `${base_url}projects/${projectId}/reports`;
+const reportGroups = projectId =>
+  `${base_url}projects/${projectId}/report-groups`;
+const particularReport = (projectId, reportId) =>
+  `${base_url}projects/${projectId}/reports?report-group-id=${reportId}`;
 
 export default {
   base_url,
@@ -24,4 +28,6 @@ export default {
   adgroups,
   campaigns,
   runRules,
+  reportGroups,
+  particularReport,
 };

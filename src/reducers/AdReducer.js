@@ -20,6 +20,12 @@ import {
   GET_CAMPAIGNS,
   GET_CAMPAIGNS_FAIL,
   GET_CAMPAIGNS_SUCCESS,
+  GET_REPORT_GROUPS,
+  GET_REPORT_GROUPS_SUCCESS,
+  GET_REPORT_GROUPS_FAIL,
+  GET_PARTICULAR_REPORT,
+  GET_PARTICULAR_REPORT_SUCCESS,
+  GET_PARTICULAR_REPORT_FAIL,
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -38,6 +44,12 @@ const INITIAL_STATE = {
   campaigns: [],
   campaignsLoading: false,
   campaignsError: null,
+  reportGroups: [],
+  reportGroupsLoading: false,
+  reportGroupsError: null,
+  particularReport: [],
+  particularReportLoading: false,
+  particularReportError: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -55,6 +67,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         projectParams: null,
         projectParamsError: null,
+        projectParamsMessage: null,
         projectParamsLoading: true,
       };
     case GET_PROJECT_PARAMS_SUCCESS:
@@ -141,10 +154,42 @@ export default (state = INITIAL_STATE, action) => {
       };
     case RUN_RULES:
       return { ...state };
-    case RUN_RULES_FAIL:
-      return { ...state };
     case RUN_RULES_SUCCESS:
       return { ...state };
+    case RUN_RULES_FAIL:
+      return { ...state };
+    case GET_REPORT_GROUPS:
+      return { ...state, reportGroupsLoading: true, reportGroupsError: null };
+    case GET_REPORT_GROUPS_SUCCESS:
+      return {
+        ...state,
+        reportGroups: action.payload,
+        reportGroupsLoading: false,
+      };
+    case GET_REPORT_GROUPS_FAIL:
+      return {
+        ...state,
+        reportGroupsError: action.payload,
+        reportGroupsLoading: false,
+      };
+    case GET_PARTICULAR_REPORT:
+      return {
+        ...state,
+        particularReportLoading: true,
+        particularReportError: null,
+      };
+    case GET_PARTICULAR_REPORT_SUCCESS:
+      return {
+        ...state,
+        particularReportLoading: false,
+        particularReport: action.payload,
+      };
+    case GET_PARTICULAR_REPORT_FAIL:
+      return {
+        ...state,
+        particularReportError: action.payload,
+        particularReportLoading: false,
+      };
     case LOG_OUT:
       return INITIAL_STATE;
     default:

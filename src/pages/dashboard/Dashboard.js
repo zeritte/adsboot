@@ -51,6 +51,10 @@ export default function Dashboard(props) {
   const shouldVisitTokenScreen = useSelector(
     state => state.auth.shouldVisitTokenScreen,
   );
+  const token = useSelector(
+    state => state.auth.token,
+  );
+  console.log(token)
   //const dispatch = useDispatch();
   var classes = useStyles();
   var theme = useTheme();

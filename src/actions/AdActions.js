@@ -19,6 +19,12 @@ import {
   UPDATE_PROJECT_PARAMS,
   UPDATE_PROJECT_PARAMS_SUCCESS,
   UPDATE_PROJECT_PARAMS_FAIL,
+  GET_REPORT_GROUPS,
+  GET_REPORT_GROUPS_SUCCESS,
+  GET_REPORT_GROUPS_FAIL,
+  GET_PARTICULAR_REPORT,
+  GET_PARTICULAR_REPORT_SUCCESS,
+  GET_PARTICULAR_REPORT_FAIL,
 } from "./types";
 import urls from "../urls";
 import { setItem } from "./AuthActions";
@@ -150,5 +156,42 @@ export const runRules = selectedAdIds => (dispatch, getState) => {
     })
     .catch(error => {
       messageHandler(dispatch, RUN_RULES_FAIL, error.response);
+    });
+};
+
+export const getReportGroups = () => (dispatch, getState) => {
+  if (!getState().ad.selectedProjectId) {
+    messageHandler(dispatch, GET_REPORT_GROUPS_FAIL, waitMessage);
+    return;
+  }
+  dispatch({ type: GET_REPORT_GROUPS });
+  axios
+    .get(urls.reportGroups(getState().ad.selectedProjectId), {
+      headers: { Authorization: getState().auth.token },
+    })
+    .then(response => {
+      dataHandler(dispatch, GET_REPORT_GROUPS_SUCCESS, response.data);
+      dispatch(getParticularReport(response.data.data[0]["reportGroupId"]));
+    })
+    .catch(error => {
+      messageHandler(dispatch, GET_REPORT_GROUPS_FAIL, error.response);
+    });
+};
+
+export const getParticularReport = reportId => (dispatch, getState) => {
+  if (!getState().ad.selectedProjectId) {
+    messageHandler(dispatch, GET_PARTICULAR_REPORT_FAIL, waitMessage);
+    return;
+  }
+  dispatch({ type: GET_PARTICULAR_REPORT });
+  axios
+    .get(urls.particularReport(getState().ad.selectedProjectId, reportId), {
+      headers: { Authorization: getState().auth.token },
+    })
+    .then(response => {
+      dataHandler(dispatch, GET_PARTICULAR_REPORT_SUCCESS, response.data);
+    })
+    .catch(error => {
+      messageHandler(dispatch, GET_PARTICULAR_REPORT_FAIL, error.response);
     });
 };

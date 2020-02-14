@@ -5,6 +5,7 @@ import {
   TableHead,
   TableBody,
   TableCell,
+  Link,
 } from "@material-ui/core";
 
 // components
@@ -29,25 +30,25 @@ export default function ReportComponent({ data }) {
         </TableRow>
       </TableHead>
       <TableBody>
-        {data.map(({ adId, adGroup, campaign,client, finalURL, isStockOut, is404NotFound,status }) => (
+        {data.map(({ adId, reportId, adUrl, inStock, page200 }) => (
           <TableRow key={adId}>
             <TableCell className="pl-3 fw-normal">{adId}</TableCell>
-            <TableCell>{adGroup}</TableCell>
-            <TableCell>{campaign}</TableCell>
-            <TableCell>{client}</TableCell>
-            <TableCell>{finalURL}</TableCell>
-            <TableCell>{isStockOut}</TableCell>
-            <TableCell>{is404NotFound}</TableCell>
+            <TableCell>{reportId}</TableCell>
             <TableCell>
-              <Button
-                color={states[status.toLowerCase()]}
-                size="small"
-                className="px-2"
-                variant="contained"
-              >
-                {status}
-              </Button>
+              <Link href={adUrl}>{adUrl}</Link>
             </TableCell>
+            <TableCell>{inStock ? "YES" : "NO"}</TableCell>
+            <TableCell>{page200 ? "YES" : "NO"}</TableCell>
+            {/* <TableCell>
+                <Button
+                  color={states[status.toLowerCase()]}
+                  size="small"
+                  className="px-2"
+                  variant="contained"
+                >
+                  {status}
+                </Button>
+              </TableCell> */}
           </TableRow>
         ))}
       </TableBody>
