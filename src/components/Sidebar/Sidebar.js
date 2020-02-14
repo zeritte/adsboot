@@ -112,7 +112,7 @@ function Sidebar(props) {
       icon: (
         <Dot
           size="large"
-          color={p.projectId === selectedProjectId ? "secondary" : "primary"}
+          color={p.projectId === selectedProjectId ? "secondary" : "gray"}
         />
       ),
     })),
