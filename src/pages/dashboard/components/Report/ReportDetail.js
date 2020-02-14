@@ -35,7 +35,9 @@ export default function ReportComponent({ data }) {
             <TableCell className="pl-3 fw-normal">{adId}</TableCell>
             <TableCell>{reportId}</TableCell>
             <TableCell>
-              <Link href={adUrl}>{adUrl}</Link>
+              <Link target="_blank" rel="noopener" href={adUrl}>
+                {adUrl}
+              </Link>
             </TableCell>
             <TableCell>{inStock ? "YES" : "NO"}</TableCell>
             <TableCell>{page200 ? "YES" : "NO"}</TableCell>

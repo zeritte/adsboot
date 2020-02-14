@@ -73,7 +73,11 @@ export default function Table(props) {
         filter: false,
         sort: false,
         customBodyRender: (value, tableMeta, updateValue) => {
-          return <Link href={value}>{value}</Link>;
+          return (
+            <Link target="_blank" rel="noopener" href={value}>
+              {value}
+            </Link>
+          );
         },
       },
     },
