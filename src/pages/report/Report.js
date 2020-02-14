@@ -67,9 +67,11 @@ export default function TokensPage() {
           </Grid>
         ) : (
           !reportGroupsLoading && (
-            <Typography color="primary">
-              There is no report group to show.
-            </Typography>
+            <Grid container justify="center">
+              <Typography color="primary">
+                There is no report group to show.
+              </Typography>
+            </Grid>
           )
         )}
 

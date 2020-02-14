@@ -171,7 +171,8 @@ export const getReportGroups = () => (dispatch, getState) => {
     })
     .then(response => {
       dataHandler(dispatch, GET_REPORT_GROUPS_SUCCESS, response.data);
-      dispatch(getParticularReport(response.data.data[0]["reportGroupId"]));
+      response.data.data.length > 0 &&
+        dispatch(getParticularReport(response.data.data[0]["reportGroupId"]));
     })
     .catch(error => {
       messageHandler(dispatch, GET_REPORT_GROUPS_FAIL, error.response);

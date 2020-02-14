@@ -159,7 +159,13 @@ export default (state = INITIAL_STATE, action) => {
     case RUN_RULES_FAIL:
       return { ...state };
     case GET_REPORT_GROUPS:
-      return { ...state, reportGroupsLoading: true, reportGroupsError: null };
+      return {
+        ...state,
+        reportGroupsLoading: true,
+        reportGroupsError: null,
+        particularReport: [],
+        particularReportError: null,
+      };
     case GET_REPORT_GROUPS_SUCCESS:
       return {
         ...state,
