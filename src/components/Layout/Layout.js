@@ -16,7 +16,7 @@ import ProjectParams from "../../pages/project_params";
 import Campaigns from "../../pages/campaigns";
 import AdGroups from "../../pages/adgroups";
 import Ads from "../../pages/ads";
-import Report from "../../pages/report"
+import Report from "../../pages/report";
 // import Typography from "../../pages/typography";
 import Notifications from "../../pages/notifications";
 // import Maps from "../../pages/maps";
@@ -25,6 +25,7 @@ import Notifications from "../../pages/notifications";
 
 // context
 import { useLayoutState } from "../../context/LayoutContext";
+import NotificationWrapper from "../NotificationWrapper";
 
 function Layout(props) {
   var classes = useStyles();
@@ -43,6 +44,7 @@ function Layout(props) {
           })}
         >
           <div className={classes.fakeToolbar} />
+          <NotificationWrapper />
           <Switch>
             <Route path="/app/dashboard" component={Dashboard} />
             <Route path="/app/tokens" component={Tokens} />

@@ -26,6 +26,7 @@ import {
   GET_PARTICULAR_REPORT,
   GET_PARTICULAR_REPORT_SUCCESS,
   GET_PARTICULAR_REPORT_FAIL,
+  SET_NOTIFICATION,
 } from "../actions/types";
 
 const INITIAL_STATE = {
@@ -50,12 +51,21 @@ const INITIAL_STATE = {
   particularReport: [],
   particularReportLoading: false,
   particularReportError: null,
+  notificationType: null,
+  notificationMessage: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_ITEM:
       return { ...state, [action.payload.prop]: action.payload.value };
+    case SET_NOTIFICATION:
+      return {
+        ...state,
+        notificationType: action.payload.type,
+        notificationMessage: action.payload.message,
+        notificationId: Math.random(),
+      };
     case FETCH_PROJECTS:
       return {
         ...state,

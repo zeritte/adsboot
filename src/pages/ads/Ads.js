@@ -18,10 +18,14 @@ export default function Table(props) {
   const allAdsError = useSelector(state => state.ad.allAdsError);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllAds());
+  const setSelectedToEmpty = () => {
     setSelectedRows([]);
     setSelectedItems([]);
+  };
+
+  useEffect(() => {
+    dispatch(getAllAds());
+    setSelectedToEmpty();
     // eslint-disable-next-line
   }, [selectedProjectId]);
 
@@ -112,13 +116,13 @@ export default function Table(props) {
       setSelectedItems(rowsSelected.map(obj => obj.id));
     },
     onRowsDelete: () => {
-      setSelectedRows([]);
+      setSelectedToEmpty();
       return false;
     },
     // TODO FILTER NOT WORKS RELATED TO PACKAGE https://github.com/gregnb/mui-datatables/pull/1086
   };
 
-  const _runRules = () => dispatch(runRules(selectedItems));
+  const _runRules = () => dispatch(runRules(selectedItems, setSelectedToEmpty));
 
   const _isRunRulesDisabled = selectedItems.length === 0;
 

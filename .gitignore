@@ -6,6 +6,7 @@
 .pnp.js
 .idea/
 .firebase/
+sock
 
 # testing
 /coverage

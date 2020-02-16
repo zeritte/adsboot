@@ -25,10 +25,14 @@ import {
   GET_PARTICULAR_REPORT,
   GET_PARTICULAR_REPORT_SUCCESS,
   GET_PARTICULAR_REPORT_FAIL,
+  SET_NOTIFICATION,
 } from "./types";
 import urls from "../urls";
 import { setItem } from "./AuthActions";
 import { dataHandler, messageHandler } from "../helpers/responseHandler";
+
+export const setNotification = (type, message) => dispatch =>
+  dispatch({ type: SET_NOTIFICATION, payload: { type, message } });
 
 const waitMessage = "Please wait till your projects are fetched";
 
@@ -145,7 +149,10 @@ export const getCampaigns = () => (dispatch, getState) => {
     });
 };
 
-export const runRules = selectedAdIds => (dispatch, getState) => {
+export const runRules = (selectedAdIds, setSelectedToEmpty) => (
+  dispatch,
+  getState,
+) => {
   dispatch({ type: RUN_RULES });
   axios
     .post(urls.runRules(getState().ad.selectedProjectId), selectedAdIds, {
@@ -153,9 +160,12 @@ export const runRules = selectedAdIds => (dispatch, getState) => {
     })
     .then(response => {
       messageHandler(dispatch, RUN_RULES_SUCCESS, response.data);
+      dispatch(setNotification("info", "Rules were run!"));
+      setSelectedToEmpty();
     })
     .catch(error => {
       messageHandler(dispatch, RUN_RULES_FAIL, error.response);
+      dispatch(setNotification("error", "Rules could not run!"));
     });
 };
 
@@ -171,7 +181,7 @@ export const getReportGroups = () => (dispatch, getState) => {
     })
     .then(response => {
       dataHandler(dispatch, GET_REPORT_GROUPS_SUCCESS, response.data);
-      response.data.data.length > 0 &&
+      if (response.data.data.length > 0)
         dispatch(getParticularReport(response.data.data[0]["reportGroupId"]));
     })
     .catch(error => {
@@ -191,6 +201,7 @@ export const getParticularReport = reportId => (dispatch, getState) => {
     })
     .then(response => {
       dataHandler(dispatch, GET_PARTICULAR_REPORT_SUCCESS, response.data);
+      dispatch(setNotification("success", "The latest report is fetched."));
     })
     .catch(error => {
       messageHandler(dispatch, GET_PARTICULAR_REPORT_FAIL, error.response);

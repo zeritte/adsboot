@@ -19,6 +19,7 @@ export const UPDATE_TOKENS = "update_tokens";
 export const UPDATE_TOKENS_SUCCESS = "update_tokens_success";
 export const UPDATE_TOKENS_FAIL = "update_tokens_fail";
 
+export const SET_NOTIFICATION = "set_notification";
 export const FETCH_PROJECTS = "fetch_projects";
 export const GET_PROJECT_PARAMS = "get_project_params";
 export const GET_PROJECT_PARAMS_SUCCESS = "get_project_params_success";
