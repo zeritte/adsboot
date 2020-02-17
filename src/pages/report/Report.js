@@ -153,9 +153,6 @@ const columns = [
     options: {
       filter: true,
       sort: true,
-      customBodyRender: (value, tableMeta, updateValue) => {
-        return <Typography>{value ? "YES" : "NO"}</Typography>;
-      },
     },
   },
   {
@@ -164,9 +161,6 @@ const columns = [
     options: {
       filter: true,
       sort: true,
-      customBodyRender: (value, tableMeta, updateValue) => {
-        return <Typography>{value ? "YES" : "NO"}</Typography>;
-      },
     },
   },
 ];

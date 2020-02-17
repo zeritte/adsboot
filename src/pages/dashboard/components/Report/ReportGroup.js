@@ -40,7 +40,16 @@ export default function ReportComponent({
               reportGroupId !== selectedId && onClick(reportGroupId)
             }
           >
-            <TableCell className="pl-3 fw-normal">{reportGroupId}</TableCell>
+            <TableCell className="pl-3 fw-normal">
+              <Button
+                color="warning"
+                className="px-2"
+                style={{ width: "100%" }}
+                disabled={reportGroupId === selectedId}
+              >
+                {reportGroupId}
+              </Button>
+            </TableCell>
             <TableCell>{createdAt}</TableCell>
             <TableCell>{totalAdCount}</TableCell>
           </TableRow>
