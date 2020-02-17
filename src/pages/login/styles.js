@@ -40,7 +40,7 @@ export default makeStyles(theme => ({
   },
   formContainer: {
     width: "40%",
-    height: "100%",
+    height: "90%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -51,6 +51,7 @@ export default makeStyles(theme => ({
   },
   form: {
     width: 320,
+    marginBottom: 40,
   },
   tab: {
     fontWeight: 400,
@@ -138,7 +139,6 @@ export default makeStyles(theme => ({
     marginLeft: theme.spacing(4),
   },
   copyright: {
-    marginTop: theme.spacing(4),
     whiteSpace: "nowrap",
     [theme.breakpoints.up("md")]: {
       position: "absolute",
