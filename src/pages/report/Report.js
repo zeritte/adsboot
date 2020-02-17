@@ -1,12 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  Grid,
-  TextField,
-  Button,
-  Typography,
-  CircularProgress,
-  Link,
-} from "@material-ui/core";
+import React, { useEffect } from "react";
+import { Grid, Typography, CircularProgress, Link } from "@material-ui/core";
 
 // styles
 import useStyles from "./styles";
@@ -19,10 +12,12 @@ import ReportDetail from "../../helpers/datatable";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getReportGroups, getParticularReport } from "../../actions";
-import { getPageValue } from "../../helpers/datatable/utils";
 
 export default function TokensPage() {
   const selectedProjectId = useSelector(state => state.ad.selectedProjectId);
+  const selectedParticularReportId = useSelector(
+    state => state.ad.selectedParticularReportId,
+  );
   const particularReport = useSelector(state => state.ad.particularReport);
   const particularReportLoading = useSelector(
     state => state.ad.particularReportLoading,
@@ -117,6 +112,8 @@ export default function TokensPage() {
             >
               <ReportGroup
                 onClick={e => dispatch(getParticularReport(e))}
+                selectedId={selectedParticularReportId}
+                selectedBGColor="#bbdefb"
                 key="group"
                 data={reportGroups}
               />
@@ -141,6 +138,7 @@ export default function TokensPage() {
               title="Report Details"
               data={particularReport}
               columns={columns}
+              options={{ filterType: "checkbox" }}
             />
           </Grid>
         )}

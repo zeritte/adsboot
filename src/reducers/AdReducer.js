@@ -51,6 +51,7 @@ const INITIAL_STATE = {
   particularReport: [],
   particularReportLoading: false,
   particularReportError: null,
+  selectedParticularReportId: null,
   notificationType: null,
   notificationMessage: null,
 };
