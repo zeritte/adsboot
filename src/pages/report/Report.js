@@ -131,7 +131,6 @@ export default function TokensPage() {
             </Grid>
           )
         )}
-
         <Grid container justify="center">
           {particularReportLoading && <CircularProgress />}
           <Typography color="secondary">{particularReportError}</Typography>
