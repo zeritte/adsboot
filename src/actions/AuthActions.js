@@ -60,12 +60,24 @@ export const logoutUser = () => dispatch => {
 //     });
 // };
 
-export const signUp = (fname, lname, email, password) => dispatch => {
+export const signUp = (
+  fname,
+  lname,
+  email,
+  password,
+  setActiveTabId,
+) => dispatch => {
   dispatch({ type: SIGN_UP });
   axios
-    .post(urls.registration, { name: fname, surname: lname, email, password })
+    .post(urls.registration, {
+      name: fname,
+      surname: lname,
+      email,
+      password,
+    })
     .then(response => {
       messageHandler(dispatch, SIGN_UP_SUCCESS, response);
+      setActiveTabId(0);
       dispatch(loginUser(email, password));
     })
     .catch(error => {

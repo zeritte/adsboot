@@ -206,7 +206,7 @@ function Login(props) {
                 fullWidth
                 onKeyDown={e =>
                   e.key === "Enter" &&
-                  props.signUp(nameValue, lastname, loginValue, passwordValue)
+                  props.signUp(nameValue, lastname, loginValue, passwordValue, setActiveTabId)
                 }
               />
               <div className={classes.creatingButtonContainer}>
@@ -220,6 +220,7 @@ function Login(props) {
                         lastname,
                         loginValue,
                         passwordValue,
+                        setActiveTabId,
                       )
                     }
                     disabled={

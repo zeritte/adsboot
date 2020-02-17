@@ -5,6 +5,7 @@ import {
   Button,
   Typography,
   CircularProgress,
+  Link,
 } from "@material-ui/core";
 
 // styles
@@ -14,7 +15,7 @@ import useStyles from "./styles";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import Widget from "../../components/Widget/Widget";
 import ReportGroup from "../dashboard/components/Report/ReportGroup";
-import ReportDetail from "../dashboard/components/Report/ReportDetail";
+import ReportDetail from "../../helpers/datatable";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getReportGroups, getParticularReport } from "../../actions";
@@ -41,6 +42,62 @@ export default function TokensPage() {
   useEffect(() => {
     dispatch(getReportGroups());
   }, [selectedProjectId]);
+
+  const columns = [
+    {
+      label: "Report ID",
+      name: "reportId",
+      options: {
+        filter: false,
+        sort: true,
+      },
+    },
+    {
+      label: "Ad ID",
+      name: "adId",
+      options: {
+        filter: false,
+        sort: true,
+      },
+    },
+    {
+      label: "Ad Url",
+      name: "adUrl",
+      options: {
+        filter: false,
+        sort: false,
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return (
+            <Link target="_blank" rel="noopener" href={value}>
+              {value}
+            </Link>
+          );
+        },
+      },
+    },
+    {
+      label: "Page200",
+      name: "page200",
+      options: {
+        filter: true,
+        sort: true,
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return <Typography>{value ? "YES" : "NO"}</Typography>;
+        },
+      },
+    },
+    {
+      label: "Instock",
+      name: "inStock",
+      options: {
+        filter: true,
+        sort: true,
+        customBodyRender: (value, tableMeta, updateValue) => {
+          return <Typography>{value ? "YES" : "NO"}</Typography>;
+        },
+      },
+    },
+  ];
 
   return (
     <>
@@ -81,14 +138,11 @@ export default function TokensPage() {
         </Grid>
         {particularReport.length > 0 && (
           <Grid item xs={12}>
-            <Widget
+            <ReportDetail
               title="Report Details"
-              upperTitle
-              disableWidgetMenu
-              noBodyPadding
-            >
-              <ReportDetail key="particular" data={particularReport} />
-            </Widget>
+              data={particularReport}
+              columns={columns}
+            />
           </Grid>
         )}
       </Grid>
