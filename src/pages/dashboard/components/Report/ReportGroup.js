@@ -5,8 +5,6 @@ import {
   TableHead,
   TableBody,
   TableCell,
-  Link,
-  Typography,
 } from "@material-ui/core";
 
 // components
