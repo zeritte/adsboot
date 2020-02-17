@@ -36,7 +36,9 @@ export default function ReportComponent({
             style={{
               backgroundColor: reportGroupId === selectedId && selectedBGColor,
             }}
-            onClick={() => onClick(reportGroupId)}
+            onClick={() =>
+              reportGroupId !== selectedId && onClick(reportGroupId)
+            }
           >
             <TableCell className="pl-3 fw-normal">{reportGroupId}</TableCell>
             <TableCell>{createdAt}</TableCell>
