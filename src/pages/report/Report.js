@@ -149,7 +149,7 @@ const columns = [
   },
   {
     label: "200?",
-    name: "page200",
+    name: "isPage200",
     options: {
       filter: true,
       sort: true,
@@ -157,7 +157,7 @@ const columns = [
   },
   {
     label: "Stock?",
-    name: "inStock",
+    name: "isInStock",
     options: {
       filter: true,
       sort: true,

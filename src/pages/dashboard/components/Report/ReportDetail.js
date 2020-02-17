@@ -17,6 +17,8 @@ const states = {
   active: "active",
 };
 
+// NOT USED!!!
+
 export default function ReportComponent({ data }) {
   var keys = Object.keys(data[0]).map(i => i.toUpperCase());
 
