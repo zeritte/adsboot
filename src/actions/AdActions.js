@@ -31,8 +31,8 @@ import urls from "../urls";
 import { setItem } from "./AuthActions";
 import { dataHandler, messageHandler } from "../helpers/responseHandler";
 
-export const setNotification = (type, message) => dispatch =>
-  dispatch({ type: SET_NOTIFICATION, payload: { type, message } });
+export const setNotification = (type, message, id) => dispatch =>
+  dispatch({ type: SET_NOTIFICATION, payload: { type, message, id } });
 
 const waitMessage = "Please wait till your projects are fetched";
 
@@ -208,7 +208,9 @@ export const getParticularReport = (reportId, theLatest) => (
       dataHandler(dispatch, GET_PARTICULAR_REPORT_SUCCESS, response.data);
       dispatch(setItem("selectedParticularReportId", reportId));
       theLatest &&
-        dispatch(setNotification("success", "The latest report is fetched."));
+        dispatch(
+          setNotification("success", "The latest report is fetched.", reportId),
+        );
     })
     .catch(error => {
       messageHandler(dispatch, GET_PARTICULAR_REPORT_FAIL, error.response);

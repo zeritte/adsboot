@@ -65,7 +65,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         notificationType: action.payload.type,
         notificationMessage: action.payload.message,
-        notificationId: Math.random(),
+        notificationId: action.payload.id ? action.payload.id : Math.random(),
       };
     case FETCH_PROJECTS:
       return {
