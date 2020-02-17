@@ -25,57 +25,6 @@ export default function Table(props) {
     // eslint-disable-next-line
   }, [selectedProjectId]);
 
-  const columns = [
-    {
-      label: "Campaign ID",
-      name: "id",
-      options: {
-        filter: false,
-        sort: true,
-      },
-    },
-    {
-      label: "Name",
-      name: "name",
-      options: {
-        filter: false,
-        sort: true,
-      },
-    },
-    {
-      label: "Status",
-      name: "status",
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
-    {
-      label: "Start Date",
-      name: "startDate",
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
-    {
-      label: "End Date",
-      name: "endDate",
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
-    {
-      label: "Budget",
-      name: "budget",
-      options: {
-        filter: false,
-        sort: true,
-      },
-    },
-  ];
-
   const options = {
     filterType: "checkbox",
     rowsSelected: selectedRows,
@@ -140,3 +89,54 @@ export default function Table(props) {
     </>
   );
 }
+
+const columns = [
+  {
+    label: "Campaign ID",
+    name: "id",
+    options: {
+      filter: false,
+      sort: true,
+    },
+  },
+  {
+    label: "Name",
+    name: "name",
+    options: {
+      filter: false,
+      sort: true,
+    },
+  },
+  {
+    label: "Status",
+    name: "status",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    label: "Start Date",
+    name: "startDate",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    label: "End Date",
+    name: "endDate",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    label: "Budget",
+    name: "budget",
+    options: {
+      filter: false,
+      sort: true,
+    },
+  },
+];

@@ -38,62 +38,6 @@ export default function TokensPage() {
     dispatch(getReportGroups());
   }, [selectedProjectId]);
 
-  const columns = [
-    {
-      label: "Report ID",
-      name: "reportId",
-      options: {
-        filter: false,
-        sort: true,
-      },
-    },
-    {
-      label: "Ad ID",
-      name: "adId",
-      options: {
-        filter: false,
-        sort: true,
-      },
-    },
-    {
-      label: "Ad Url",
-      name: "adUrl",
-      options: {
-        filter: false,
-        sort: false,
-        customBodyRender: (value, tableMeta, updateValue) => {
-          return (
-            <Link target="_blank" rel="noopener" href={value}>
-              {value}
-            </Link>
-          );
-        },
-      },
-    },
-    {
-      label: "Page200",
-      name: "page200",
-      options: {
-        filter: true,
-        sort: true,
-        customBodyRender: (value, tableMeta, updateValue) => {
-          return <Typography>{value ? "YES" : "NO"}</Typography>;
-        },
-      },
-    },
-    {
-      label: "Instock",
-      name: "inStock",
-      options: {
-        filter: true,
-        sort: true,
-        customBodyRender: (value, tableMeta, updateValue) => {
-          return <Typography>{value ? "YES" : "NO"}</Typography>;
-        },
-      },
-    },
-  ];
-
   return (
     <>
       <PageTitle title="Report" />
@@ -146,3 +90,83 @@ export default function TokensPage() {
     </>
   );
 }
+
+const columns = [
+  {
+    label: "Ad ID",
+    name: "adId",
+    options: {
+      filter: false,
+      sort: true,
+    },
+  },
+  {
+    label: "Campaign",
+    name: "campaignName",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    label: "Ad Group",
+    name: "adGroupName",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    label: "Ad Url",
+    name: "adUrl",
+    options: {
+      filter: false,
+      sort: false,
+      customBodyRender: (value, tableMeta, updateValue) => {
+        return (
+          <Link target="_blank" rel="noopener" href={value}>
+            {value}
+          </Link>
+        );
+      },
+    },
+  },
+  {
+    label: "Current Status",
+    name: "currentStatus",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    label: "Previous Status",
+    name: "previousStatus",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    label: "200?",
+    name: "page200",
+    options: {
+      filter: true,
+      sort: true,
+      customBodyRender: (value, tableMeta, updateValue) => {
+        return <Typography>{value ? "YES" : "NO"}</Typography>;
+      },
+    },
+  },
+  {
+    label: "Stock?",
+    name: "inStock",
+    options: {
+      filter: true,
+      sort: true,
+      customBodyRender: (value, tableMeta, updateValue) => {
+        return <Typography>{value ? "YES" : "NO"}</Typography>;
+      },
+    },
+  },
+];

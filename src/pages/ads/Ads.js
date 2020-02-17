@@ -29,80 +29,6 @@ export default function Table(props) {
     // eslint-disable-next-line
   }, [selectedProjectId]);
 
-  const columns = [
-    {
-      label: "Ad ID",
-      name: "id",
-      options: {
-        filter: false,
-        sort: true,
-      },
-    },
-    {
-      label: "Status",
-      name: "status",
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
-    {
-      label: "Headline Part 1",
-      name: "headlinePart1",
-      options: {
-        filter: false,
-        sort: true,
-      },
-    },
-    {
-      label: "Headline Part 2",
-      name: "headlinePart2",
-      options: {
-        filter: false,
-        sort: true,
-      },
-    },
-    {
-      label: "Description",
-      name: "description",
-      options: {
-        filter: false,
-        sort: true,
-      },
-    },
-    {
-      label: "Final Url",
-      name: "url",
-      options: {
-        filter: false,
-        sort: false,
-        customBodyRender: (value, tableMeta, updateValue) => {
-          return (
-            <Link target="_blank" rel="noopener" href={value}>
-              {value}
-            </Link>
-          );
-        },
-      },
-    },
-    {
-      label: "Campaign",
-      name: "campaignName",
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
-    {
-      label: "Ad Group",
-      name: "adGroupName",
-      options: {
-        filter: true,
-        sort: true,
-      },
-    },
-  ];
-
   const options = {
     filterType: "checkbox",
     rowsSelected: selectedRows,
@@ -168,3 +94,77 @@ export default function Table(props) {
     </>
   );
 }
+
+const columns = [
+  {
+    label: "Ad ID",
+    name: "id",
+    options: {
+      filter: false,
+      sort: true,
+    },
+  },
+  {
+    label: "Status",
+    name: "status",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    label: "Headline Part 1",
+    name: "headlinePart1",
+    options: {
+      filter: false,
+      sort: true,
+    },
+  },
+  {
+    label: "Headline Part 2",
+    name: "headlinePart2",
+    options: {
+      filter: false,
+      sort: true,
+    },
+  },
+  {
+    label: "Description",
+    name: "description",
+    options: {
+      filter: false,
+      sort: true,
+    },
+  },
+  {
+    label: "Final Url",
+    name: "url",
+    options: {
+      filter: false,
+      sort: false,
+      customBodyRender: (value, tableMeta, updateValue) => {
+        return (
+          <Link target="_blank" rel="noopener" href={value}>
+            {value}
+          </Link>
+        );
+      },
+    },
+  },
+  {
+    label: "Campaign",
+    name: "campaignName",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+  {
+    label: "Ad Group",
+    name: "adGroupName",
+    options: {
+      filter: true,
+      sort: true,
+    },
+  },
+];
