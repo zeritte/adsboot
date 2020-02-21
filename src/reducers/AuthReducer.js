@@ -20,6 +20,7 @@ import {
 } from "../actions/types";
 
 const INITIAL_STATE = {
+  email: null,
   token: null,
   shouldVisitTokenScreen: false,
   firstname: null,

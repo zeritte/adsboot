@@ -28,7 +28,7 @@ const persistConfig = {
   storage,
   stateReconciler: autoMergeLevel2,
   transforms: [
-    createWhitelistFilter("auth", ["firstname", "lastname", "token"]),
+    createWhitelistFilter("auth", ["firstname", "lastname", "token", "email"]),
     createWhitelistFilter("ad", ["projects", "selectedProjectId"]),
   ],
 };

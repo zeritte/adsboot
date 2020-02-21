@@ -291,6 +291,9 @@ function Header(props) {
             <Typography variant="h4" weight="medium">
               {props.name}
             </Typography>
+            <Typography variant="p" weight="light">
+              {props.email}
+            </Typography>
           </div>
           {props.projects.map(p => (
             <MenuItem
@@ -326,6 +329,7 @@ const mapStateToProps = ({ auth, ad }) => {
     name: `${auth.firstname} ${auth.lastname}`,
     projects: ad.projects,
     selectedProjectId: ad.selectedProjectId,
+    email: auth.email,
   };
 };
 

@@ -33,6 +33,7 @@ export const loginUser = (email, password) => dispatch => {
     .post(urls.session, { email, password })
     .then(response => {
       dataHandler(dispatch, LOG_IN_SUCCESS, response.data);
+      dispatch(setItem("email", email));
       dispatch(setShouldVisitTokenScreen(response.data.status.code === 3000));
       dispatch(getProjects());
     })
