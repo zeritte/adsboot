@@ -27,14 +27,29 @@ import Notifications from "../../pages/notifications";
 import { useLayoutState } from "../../context/LayoutContext";
 import NotificationWrapper from "../NotificationWrapper";
 
+import SockJsClient from "react-stomp";
+
+import { useSelector, useDispatch } from "react-redux";
+import { setNotification } from "../../actions";
+
 function Layout(props) {
   var classes = useStyles();
-
   // global
   var layoutState = useLayoutState();
 
+  const { email, token } = useSelector(state => ({
+    email: state.auth.email,
+    token: state.auth.token,
+  }));
+  const dispatch = useDispatch();
+
   return (
     <div className={classes.root}>
+      <SockJsClient
+        url="https://adsbotapi.herokuapp.com/ws"
+        topics={[`/user/${email}/notification/report`]}
+        onMessage={message => dispatch(setNotification("success", message.msg))}
+      />
       <>
         <Header history={props.history} />
         <Sidebar />
@@ -46,7 +61,7 @@ function Layout(props) {
           <div className={classes.fakeToolbar} />
           <NotificationWrapper />
           <Switch>
-            <Route path="/app/dashboard" component={Dashboard} />
+            <Route path="/app/dashboard" render={() => <Dashboard />} />
             <Route path="/app/tokens" component={Tokens} />
             <Route path="/app/project_params" component={ProjectParams} />
             <Route path="/app/campaigns" component={Campaigns} />

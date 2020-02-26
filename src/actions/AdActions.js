@@ -182,19 +182,14 @@ export const getReportGroups = () => (dispatch, getState) => {
     .then(response => {
       dataHandler(dispatch, GET_REPORT_GROUPS_SUCCESS, response.data);
       if (response.data.data.length > 0)
-        dispatch(
-          getParticularReport(response.data.data[0]["reportGroupId"], true),
-        );
+        dispatch(getParticularReport(response.data.data[0]["reportGroupId"]));
     })
     .catch(error => {
       messageHandler(dispatch, GET_REPORT_GROUPS_FAIL, error.response);
     });
 };
 
-export const getParticularReport = (reportId, theLatest) => (
-  dispatch,
-  getState,
-) => {
+export const getParticularReport = reportId => (dispatch, getState) => {
   if (!getState().ad.selectedProjectId) {
     messageHandler(dispatch, GET_PARTICULAR_REPORT_FAIL, waitMessage);
     return;
@@ -207,10 +202,6 @@ export const getParticularReport = (reportId, theLatest) => (
     .then(response => {
       dataHandler(dispatch, GET_PARTICULAR_REPORT_SUCCESS, response.data);
       dispatch(setItem("selectedParticularReportId", reportId));
-      theLatest &&
-        dispatch(
-          setNotification("success", "The latest report is fetched.", reportId),
-        );
     })
     .catch(error => {
       messageHandler(dispatch, GET_PARTICULAR_REPORT_FAIL, error.response);
