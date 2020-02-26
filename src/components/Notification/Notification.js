@@ -60,6 +60,7 @@ export default function Notification({ variant, ...props }) {
 
   return (
     <div
+      onClick={props.onClick}
       className={classnames(classes.notificationContainer, props.className, {
         [classes.notificationContained]: variant === "contained",
         [classes.notificationContainedShadowless]: props.shadowless,

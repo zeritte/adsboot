@@ -31,8 +31,16 @@ import urls from "../urls";
 import { setItem } from "./AuthActions";
 import { dataHandler, messageHandler } from "../helpers/responseHandler";
 
-export const setNotification = (type, message, id) => dispatch =>
-  dispatch({ type: SET_NOTIFICATION, payload: { type, message, id } });
+export const setNotification = (
+         type,
+         message,
+         id,
+         notificationAction,
+       ) => dispatch =>
+         dispatch({
+           type: SET_NOTIFICATION,
+           payload: { type, message, id, notificationAction },
+         });
 
 const waitMessage = "Please wait till your projects are fetched";
 

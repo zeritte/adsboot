@@ -11,10 +11,11 @@ import { useSelector } from "react-redux";
 
 export default function() {
   var classes = useStyles();
-  const { type, message, id } = useSelector(state => ({
+  const { type, message, id, notificationAction } = useSelector(state => ({
     type: state.ad.notificationType,
     message: state.ad.notificationMessage,
     id: state.ad.notificationId,
+    notificationAction: state.ad.notificationAction,
   }));
 
   useEffect(() => {
@@ -59,12 +60,15 @@ export default function() {
         break;
     }
 
-    sendNotification(componentProps, {
-      type: notificationType,
-      position: toast.POSITION.TOP_RIGHT,
-      progressClassName: classes.progress,
-      className: classes.notification,
-    });
+    sendNotification(
+      { ...componentProps, onClick: notificationAction },
+      {
+        type: notificationType,
+        position: toast.POSITION.TOP_RIGHT,
+        progressClassName: classes.progress,
+        className: classes.notification,
+      },
+    );
   }
 
   function sendNotification(componentProps, options) {

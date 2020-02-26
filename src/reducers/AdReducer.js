@@ -54,6 +54,8 @@ const INITIAL_STATE = {
   selectedParticularReportId: null,
   notificationType: null,
   notificationMessage: null,
+  notificationId: null,
+  notificationAction: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -66,6 +68,7 @@ export default (state = INITIAL_STATE, action) => {
         notificationType: action.payload.type,
         notificationMessage: action.payload.message,
         notificationId: action.payload.id ? action.payload.id : Math.random(),
+        notificationAction: action.payload.notificationAction,
       };
     case FETCH_PROJECTS:
       return {

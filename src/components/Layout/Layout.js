@@ -48,7 +48,13 @@ function Layout(props) {
       <SockJsClient
         url="https://adsbotapi.herokuapp.com/ws"
         topics={[`/user/${email}/notification/report`]}
-        onMessage={message => dispatch(setNotification("success", message.msg))}
+        onMessage={message =>
+          dispatch(
+            setNotification("success", message.msg, null, () =>
+              props.history.push("/app/report"),
+            ),
+          )
+        }
       />
       <>
         <Header history={props.history} />
