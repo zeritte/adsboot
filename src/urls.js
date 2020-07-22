@@ -1,4 +1,5 @@
-const base_url = "https://adsbotapi.herokuapp.com/api/"; // production
+const base_url =
+  "http://adsbotprod-env.eba-jtuvxfnb.eu-west-3.elasticbeanstalk.com/"; // production
 
 const session = `${base_url}token`;
 const registration = `${base_url}user`;
